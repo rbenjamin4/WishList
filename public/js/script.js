@@ -4,19 +4,31 @@
  */
 
 
-// const postTrips = async(tripObj) => {
-//     const response = await fetch('/api/trips', {
-//         method: 'POST',
-//         body: JSON.stringify(tripObj),
-//         headers: {
-//             'Content-Type': 'application/json',
-//         }
-//     })
+const postUsers = async(userObj) => {
+    //console.log('posting ' + userObj.name)
+    const response = await fetch('/api/users', {
+        method: 'POST',
+        body: JSON.stringify(userObj),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    //console.log('posted ' + userObj.name)
 
-//     const data = await response.json()
+    //const data = await response.json()
 
-//     console.log(data)
-// }
+    //console.log(data)
+}
+
+const newUser = {
+    name: 'George',
+    username: 'George',
+    password: 'reallyInsecurePassword'
+}
+
+//console.log('about to post ' + newUser.name)
+
+//postUsers(newUser)
 
 // const newTrip = {
 //     name: 'pretty cool mountain adventure',
@@ -30,13 +42,14 @@
  */
 
 
-// const getTrips = async() => {
-//     const response = await fetch('/api/trips')
-//     const data = await response.json()
-//     console.log(data)
-// }
+const getUsers = async() => {
+    const response = await fetch('/api/users')
+    const data = await response.json()
+    console.log(data)
+}
 
 // getTrips()
+//getUsers()
 
 
 /**
@@ -44,16 +57,16 @@
  */
 
 
-// const deleteTrips = async(id) => {
-//    const response = await fetch(`/api/trips/{id}`, {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         }
-//     })
-//     const data = await response.json()
-//     console.log(data)
-// }
+const deleteUsers = async(id) => {
+   const response = await fetch(`/api/users/{id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    const data = await response.json()
+    console.log(data)
+}
 
 // deleteTrip(1)
 
@@ -68,16 +81,16 @@
 // }
 
 
-// const updateTrip = async(id, newTripObj) => {
-//    const response = await fetch(`/api/trips/{id}`, {
-//         method: 'PUT',
-//         body: JSON.stringify(newTripObj),
-//         headers: {
-//             'Content-Type': 'application/json',
-//         }
-//     })
-//     const data = await response.json()
-//     console.log(data)
-// }
+const updateUser = async(id, newUserObj) => {
+   const response = await fetch(`/api/users/{id}`, {
+        method: 'PUT',
+        body: JSON.stringify(newUserObj),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    const data = await response.json()
+    console.log(data)
+}
 
 // updateTrip(1, newTrip)
