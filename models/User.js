@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Trip extends Model {}
+class User extends Model {}
 
-Trip.init(
+User.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,7 +15,18 @@ Trip.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    owned_lists: {
+      type: DataTypes.STRING,
+    },
+    shared_lists: {
       type: DataTypes.STRING,
     },
     date_created: {
@@ -29,8 +40,8 @@ Trip.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'trip',
+    modelName: 'users',
   }
 );
 
-module.exports = Trip;
+module.exports = User;
