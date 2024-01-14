@@ -1,0 +1,83 @@
+/* * {
+    border: 1px red solid;
+} */
+
+/*Universal Styles*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+:root {
+    --pink: #DA258D;
+    --green: #8DDA25;
+    --blue: #258DDA;
+    --black: #000000;
+    --white: #ffffff;
+}
+
+body {
+    background-color: var(--blue);
+}
+
+/*Header*/
+header {
+    background-color: var(--pink);
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Bowlby One SC', sans-serif;
+    color: var(--green);
+    font-size: 5rem;
+    line-height: 100%;
+    padding: 10px;
+    text-shadow: 5px 5px black;
+}
+
+h2 {
+    font-family: 'Bowlby One SC', sans-serif;
+    font-size: 1.5rem;
+    color: var(--blue);
+    text-shadow: 3px 3px black;
+}
+
+ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    color: var(--white);
+    margin-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+a {
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+nav {
+    background-color: var(--black);
+}
+
+
+
+/*Main*/
+
+/*Footer*/
+footer {
+    background-color: var(--black)
+}
