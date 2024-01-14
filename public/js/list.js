@@ -1,6 +1,10 @@
 
 class List {
 
+    #username
+    #exchangeDate
+    #items
+
     constructor(exchangeDate){
         this.username = ''
         this.exchangeDate = exchangeDate
@@ -14,7 +18,6 @@ class List {
      removeItem = (Item) => {
         for(let i in this.items){
             if(Item.url === this.items[i].url){
-                //this.items[i] = null
                 this.items.splice(i, 1)
             }
         }
@@ -32,6 +35,11 @@ class List {
 }
 
 class Item {
+
+    #name
+    #url
+    #comment
+    #isBought
 
     constructor(name, url){
         this.name = name
