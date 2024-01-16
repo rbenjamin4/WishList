@@ -43,9 +43,10 @@ const newUser = {
 
 
 const getUsers = async() => {
-    const response = await fetch('/api/users')
+    const response = await fetch(`/api/users`)
     const data = await response.json()
-    console.log(data)
+    //console.log(data)
+    return (data)
 }
 
 // getTrips()
@@ -58,7 +59,7 @@ const getUsers = async() => {
 
 
 const deleteUsers = async(id) => {
-   const response = await fetch(`/api/users/{id}`, {
+   const response = await fetch(`/api/users/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -82,7 +83,7 @@ const deleteUsers = async(id) => {
 
 
 const updateUser = async(id, newUserObj) => {
-   const response = await fetch(`/api/users/{id}`, {
+   const response = await fetch(`/api/users/${id}`, {
         method: 'PUT',
         body: JSON.stringify(newUserObj),
         headers: {
@@ -90,7 +91,7 @@ const updateUser = async(id, newUserObj) => {
         }
     })
     const data = await response.json()
-    console.log(data)
+    //console.log(data)
 }
 
 // updateTrip(1, newTrip)
