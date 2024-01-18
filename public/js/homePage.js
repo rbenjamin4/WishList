@@ -1,6 +1,15 @@
+//Needs to retrieve information about the user's username
+//Needs to retrieve database information about owned lists and shared lists
+    //Including: each shared list's username, and the listName, expirationDate, and number of Items for each list 
+
+//Uses functions to display this information as "lists of lists" for "my lists", and "lists I'm watching"
+
+//Create new list button will link to newList.html
+
 const welcome = document.querySelector("#welcome");
 const myLists = document.querySelector("#my-lists");
 const otherLists = document.querySelector("#other-lists");
+const newListButton = document.querySelector("#new-list-button");
 
 const welcomeUser = (userName) => {
     welcome.textContent = `Welcome back, ${userName}`;
@@ -10,25 +19,35 @@ const welcomeUser = (userName) => {
 const displayMyList = (listName, expDate, numItems) => {
     const list = document.createElement("div");
     const listP = document.createElement("p");
-    const listButton = document.createElement("button");
+    const viewButton = document.createElement("button");
+    const deleteButton = document.createElement("button");
     list.setAttribute("class", "list");
+    viewButton.setAttribute("class", "view-button");
+    deleteButton.setAttribute("class", "delete-button");
     listP.textContent = `My ${listName} list (exp. ${expDate}): ${numItems} items`;
-    listButton.textContent = "Delete";
+    viewButton.textContent = "View";
+    deleteButton.textContent = "Delete";
     myLists.appendChild(list);
+    list.appendChild(viewButton);
     list.appendChild(listP);
-    list.appendChild(listButton);
+    list.appendChild(deleteButton);
 }
 
 const displayOtherList = (userName, listName, expDate, numItems) => {
     const list = document.createElement("div");
     const listP = document.createElement("p");
-    const listButton = document.createElement("button");
+    const viewButton = document.createElement("button");
+    const removeButton = document.createElement("button");
     list.setAttribute("class", "list");
+    viewButton.setAttribute("class", "view-button");
+    removeButton.setAttribute("class", "remove-button");
     listP.textContent = `${userName}'s ${listName} list (exp. ${expDate}): ${numItems} items`;
-    listButton.textContent = "Remove";
+    viewButton.textContent = "View";
+    removeButton.textContent = "Remove";
     otherLists.appendChild(list);
+    list.appendChild(viewButton);
     list.appendChild(listP);
-    list.appendChild(listButton);
+    list.appendChild(removeButton);
 }
 
 //Example code for posting lists in my/other list lists
