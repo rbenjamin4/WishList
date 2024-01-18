@@ -28,6 +28,21 @@ h3 {
     text-align: center;
 }
 
+#my-lists {
+    position: relative;
+}
+
+#new-list-button {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 98%;
+    padding: 10px;
+    color: black;
+    border: 1px solid black;
+    background-color: var(--white);
+}
+
 /*Lists text*/
 h4 {
     font-size: 2.5rem;
@@ -43,7 +58,7 @@ h4 {
     background-color: var(--green);
 }
 
-button {
+.delete-button, .remove-button, .view-button {
     color: black;
     border: 1px solid black;
     background-color: var(--white);
