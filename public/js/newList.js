@@ -10,9 +10,9 @@ const thisUser = 1 //change to user id if auth is added
 // const georgeUser = {
 //     name: 'George',
 //     username: 'George',
-//     password: 'reallyInsecurePassword'
+//     password: 'yr7hug'
 // }
-
+// console.log(georgeUser)
 // postUsers(georgeUser)
 
 const addItem = () => {
@@ -58,7 +58,7 @@ const finishList = async() => {
         currentUser = users[thisUser-1]
         console.log(currentUser)
         updateUser(thisUser, {owned_lists: currentUser.owned_lists + newList.listToString()})
-        window.location.href = 'template.html' //change to homescreen
+        window.location.href = 'homePage.html'
     }
 }
 
