@@ -58,7 +58,7 @@ const finishList = async() => {
         currentUser = users[thisUser-1]
         console.log(currentUser)
         updateUser(thisUser, {owned_lists: currentUser.owned_lists + newList.listToString()})
-        window.location.href = 'template.html' //change to homescreen
+        window.location.href = 'homePage.html'
     }
 }
 
