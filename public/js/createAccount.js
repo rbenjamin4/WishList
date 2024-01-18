@@ -1,7 +1,4 @@
-//requiring cal.js file 
-// const cal = require("./script.js")   
-
-const myInput = document.getElementById("psw")
+const myInput = document.getElementById("password")
 const letter = document.getElementById("letter")
 const capital = document.getElementById("capital")
 const number = document.getElementById("number")
