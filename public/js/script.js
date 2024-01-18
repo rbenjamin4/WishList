@@ -28,7 +28,7 @@ const newUser = {
 
 //console.log('about to post ' + newUser.name)
 
-//postUsers(newUser)
+// postUsers(newUser)
 
 // const newTrip = {
 //     name: 'pretty cool mountain adventure',
