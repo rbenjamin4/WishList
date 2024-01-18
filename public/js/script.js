@@ -21,7 +21,7 @@ const postUsers = async(userObj) => {
 }
 
 const newUser = {
-    name: 'George',
+    //name: 'George',
     username: 'George',
     password: 'reallyInsecurePassword'
 }

@@ -10,9 +10,9 @@ const thisUser = 1 //change to user id if auth is added
 // const georgeUser = {
 //     name: 'George',
 //     username: 'George',
-//     password: 'reallyInsecurePassword'
+//     password: 'yr7hug'
 // }
-
+// console.log(georgeUser)
 // postUsers(georgeUser)
 
 const addItem = () => {
