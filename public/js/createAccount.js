@@ -4,6 +4,7 @@ const capital = document.getElementById("capital")
 const number = document.getElementById("number")
 const length = document.getElementById("length")
 const form = document.querySelector("form")
+const username = document.getElementById("username")
 
 // When the user clicks on the password field, show the message box
 myInput.onfocus = function() {
@@ -59,11 +60,12 @@ myInput.onkeyup = function() {
 
 form.addEventListener('submit', (event) => {
   event.preventDefault()
-  formData = new FormData(form)
-  const userObj = Object.fromEntries(formData)
+
+  const userObj = {
+    username: username.value,
+    password: myInput.value
+  }
   
-  const accountJSON = JSON.stringify(userObj)
-  console.log(userObj)
   postUsers(userObj)
 })
 
