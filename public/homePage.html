@@ -7,8 +7,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet" type="text/css">
-    <script src="./js/login.js" defer></script>
-    <script src="./js/script.js" defer></script>
+    <link href="./css/homePage.css" rel="stylesheet" type="text/css">
+    <script src="./js/homePage.js" defer></script>
     <title>Buy Me Things!</title>
 </head>
 <body>
@@ -17,23 +17,25 @@
         <h2>Smart wish list management</h2>
         <nav>
             <ul>
-                <li><a href="">HOME</a></li>
+                <li><a href="homePage.html">HOME</a></li>
                 <li><a href="">LOGOUT</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <label for="username">Username:</label>
-        <input type="text" name="" id="username">
-        <br>
-        <br>
-        <label for="password">Password:</label>
-        <input type="text" name="" id="password">
-        <br>
-        <br>
-        <button>Login</button>
+        <h3 id="welcome">Welcome Back, (JS code to update this with user's name)</h3>
+        <section id="list-section">
+            <section id="my-lists" class="list-of-lists">
+                <h4>My lists:</h4>
+                <!-- Gets populated by divs detailing each user list -->
+            </section>
 
-        <p>Not already a user? Create a <a href="#">new account</a></p> 
+            <section id="other-lists" class="list-of-lists">
+                <h4>Lists I'm watching:</h4>
+                <!-- Gets populated by divs detailing each list user is watching -->
+            </section>
+
+        </section>
     </main>
     <footer>
         

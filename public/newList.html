@@ -7,8 +7,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet" type="text/css">
-    <script src="./js/login.js" defer></script>
     <script src="./js/script.js" defer></script>
+    <script src="./js/list.js" defer></script>
+    <script src="./js/newList.js" defer></script>
     <title>Buy Me Things!</title>
 </head>
 <body>
@@ -18,22 +19,21 @@
         <nav>
             <ul>
                 <li><a href="">HOME</a></li>
-                <li><a href="">LOGOUT</a></li>
+                <li><a href="index.html">LOGOUT</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <label for="username">Username:</label>
-        <input type="text" name="" id="username">
-        <br>
-        <br>
-        <label for="password">Password:</label>
-        <input type="text" name="" id="password">
-        <br>
-        <br>
-        <button>Login</button>
-
-        <p>Not already a user? Create a <a href="#">new account</a></p> 
+        <div id="list">
+            <label for="itemName">Item Name</label>
+            <input type="text" id="itemName">
+            <label for="itemUrl">Item URL</label>
+            <input type="text" id="itemUrl">
+            <button id="add">Add new Item to list</button>
+        </div>
+        <label for="exchangeDate">Gift Exchange Date:</label>
+        <input type="date" id="exchangeDate">
+        <button id="finish">Create List</button>
     </main>
     <footer>
         
