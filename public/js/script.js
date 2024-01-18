@@ -6,7 +6,7 @@
 
 const postUsers = async(userObj) => {
     //console.log('posting ' + userObj.name)
-    const response = await fetch('/api/users', {
+    const response = await fetch(`/api/users`, {
         method: 'POST',
         body: JSON.stringify(userObj),
         headers: {
@@ -21,10 +21,31 @@ const postUsers = async(userObj) => {
 }
 
 const newUser = {
-    name: 'George',
+    //name: 'George',
     username: 'George',
     password: 'reallyInsecurePassword'
 }
+
+// postUsers(newUser)
+
+const postItem = async(itemObj) => {
+    const response = await fetch(`/api/items`, {
+        method: 'POST',
+        body: JSON.stringify(itemObj),
+        headers: {
+            'Content-Type' : 'application/json',
+        }
+    })
+}
+
+const newItem = {
+    list_id: 1,
+    name: 'socks',
+    url: 'https://amazon.com',
+    //exchange_date: 
+}
+
+//postItem(newItem)
 
 //console.log('about to post ' + newUser.name)
 
@@ -49,6 +70,12 @@ const getUsers = async() => {
     return (data)
 }
 
+const getItems = async() => {
+    const response = await fetch(`/api/items`)
+    const data = await response.json()
+    return data
+}
+
 // getTrips()
 //getUsers()
 
@@ -65,8 +92,17 @@ const deleteUsers = async(id) => {
             'Content-Type': 'application/json',
         }
     })
-    const data = await response.json()
-    console.log(data)
+    //const data = await response.json()
+    //console.log(data)
+}
+
+const deleteItems = async(id) => {
+    const response = await fetch(`/api/items/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    })
 }
 
 // deleteTrip(1)
@@ -90,8 +126,17 @@ const updateUser = async(id, newUserObj) => {
             'Content-Type': 'application/json',
         }
     })
-    const data = await response.json()
+    //const data = await response.json()
     //console.log(data)
 }
 
+const updateItem = async(id, newItemObj) => {
+    const response = await fetch(`/api/items/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(newItemObj),
+        headers: {
+            'Content-Type' : 'application/json',
+        }
+    })
+}
 // updateTrip(1, newTrip)
