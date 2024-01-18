@@ -63,8 +63,12 @@ myInput.onkeyup = function() {
 form.addEventListener('submit', (event) => {
   event.preventDefault()
   formData = new FormData(form)
-  const accountObj = Object.fromEntries(formData)
+  const userObj = Object.fromEntries(formData)
   
-  const accountJSON = JSON.stringify(accountObj)
+  const accountJSON = JSON.stringify(userObj)
+  console.log(userObj)
+  postUsers(userObj)
 })
+
+
 
