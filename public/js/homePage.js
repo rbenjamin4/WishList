@@ -1,3 +1,11 @@
+//Needs to retrieve information about the user's username
+//Needs to retrieve database information about owned lists and shared lists
+    //Including: each shared list's username, and the listName, expirationDate, and number of Items for each list 
+
+//Uses functions to display this information as "lists of lists" for "my lists", and "lists I'm watching"
+
+//Create new list button will link to newList.html
+
 const welcome = document.querySelector("#welcome");
 const myLists = document.querySelector("#my-lists");
 const otherLists = document.querySelector("#other-lists");
