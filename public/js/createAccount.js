@@ -65,8 +65,9 @@ form.addEventListener('submit', (event) => {
     username: username.value,
     password: myInput.value
   }
-  
+
   postUsers(userObj)
+  window.location.href = 'homePage.html'
 })
 
 
