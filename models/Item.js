@@ -27,6 +27,13 @@ Item.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
+    is_bought: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    comment: {
+      type: DataTypes.STRING,
+    },
     date_created: {
       type: DataTypes.DATE,
       allowNull: false,
