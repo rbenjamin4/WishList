@@ -17,7 +17,7 @@ class List {
 
      removeItem = (Item) => {
         for(let i in this.items){
-            if(Item.url === this.items[i].url){
+            if(Item === this.items[i]){
                 this.items.splice(i, 1)
             }
         }
