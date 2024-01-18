@@ -67,6 +67,7 @@ form.addEventListener('submit', (event) => {
   }
 
   postUsers(userObj)
+  alert('Your account has been created!')
   window.location.href = 'homePage.html'
 })
 
