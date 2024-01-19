@@ -1,3 +1,12 @@
+/*Universal Styles*/
+:root {
+  --pink: #DA258D;
+  --green: #8DDA25;
+  --blue: #258DDA;
+  --black: #000000;
+  --white: #ffffff;
+}
+
 input {
     width: 100%;
     padding: 12px;
@@ -7,23 +16,39 @@ input {
     margin-top: 6px;
     margin-bottom: 16px;
   }
+
+  label {
+    font-family: Arial, Helvetica, sans-serif;
+  }
   
   /* Style the submit button */
   input[type=submit] {
-    background-color: #322fee;
+    background-color: var(--blue);
     color: white;
+    border-radius: 8px;
   }
   
   /* Style the container for inputs */
   .container {
-    background-color: #f1f1f1;
+    width: 50%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--white);
     padding: 20px;
+  }
+
+  .parText {
+    margin-bottom: 15px;
+    font-family: Arial, Helvetica, sans-serif;
   }
   
   /* The message box is shown when the user clicks on the password field */
   #message {
     display:none;
-    background: #f1f1f1;
+    width: 50%;
+    margin: auto;
+    background: var(--white);
     color: #000;
     position: relative;
     padding: 20px;
@@ -31,16 +56,18 @@ input {
   }
   
   #message p {
+    font-family: Arial, Helvetica, sans-serif;
     padding: 10px 35px;
     font-size: 18px;
   }
   
   /* Add a green text color and a checkmark when the requirements are right */
   .valid {
-    color: green;
+    color: var(--green)
   }
   
   .valid:before {
+    font-family: Arial, Helvetica, sans-serif;
     position: relative;
     left: -35px;
     content: "✔";
@@ -48,10 +75,11 @@ input {
   
   /* Add a red text color and an "x" when the requirements are wrong */
   .invalid {
-    color: red;
+    color: var(--pink)
   }
   
   .invalid:before {
+    font-family: Arial, Helvetica, sans-serif;
     position: relative;
     left: -35px;
     content: "✖";
