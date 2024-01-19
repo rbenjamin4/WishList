@@ -3,6 +3,7 @@ const itemName = document.querySelector('#itemName')
 const itemUrl = document.querySelector('#itemUrl')
 const add = document.querySelector('#add')
 const exchangeDate = document.querySelector('#exchangeDate')
+const listName = document.querySelector('#listName')
 const finish = document.querySelector('#finish')
 const items = []
 const thisUser = 1 //change to user id if auth is added
@@ -17,7 +18,7 @@ const thisUser = 1 //change to user id if auth is added
 
 const addItem = () => {
     if(itemName.value && itemUrl.value){
-        const newItem = new Item(itemName.value, itemUrl.value)
+        const newItem = {name: itemName.value, url: itemUrl.value}
         items.push(newItem)
         const div = document.createElement('div')
         const a = document.createElement('a')
@@ -49,15 +50,15 @@ const addItem = () => {
 add.addEventListener('click', addItem)
 
 const finishList = async() => {
-    if(items){
-        const newList = new List(exchangeDate.value)
+    if(items && exchangeDate && listName){
+        const itemList = await getItems()
+        const listId = itemList[itemList.length - 1].list_id + 1
         for(i in items){
-            newList.addItem(items[i])
+            postItem({list_id: listId, list_name: listName, name: items[i].name, url: items[i].url, exchange_date: exchangeDate.value})
         }
         users = await getUsers()
         currentUser = users[thisUser-1]
-        console.log(currentUser)
-        updateUser(thisUser, {owned_lists: currentUser.owned_lists + newList.listToString()})
+        updateUser(thisUser, {owned_lists: currentUser.owned_lists + ',' + listId})
         window.location.href = 'homePage.html'
     }
 }
