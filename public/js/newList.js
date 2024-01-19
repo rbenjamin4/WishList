@@ -3,6 +3,7 @@ const itemName = document.querySelector('#itemName')
 const itemUrl = document.querySelector('#itemUrl')
 const add = document.querySelector('#add')
 const exchangeDate = document.querySelector('#exchangeDate')
+const listName = document.querySelector('#listName')
 const finish = document.querySelector('#finish')
 const items = []
 const thisUser = 1 //change to user id if auth is added
@@ -49,11 +50,11 @@ const addItem = () => {
 add.addEventListener('click', addItem)
 
 const finishList = async() => {
-    if(items){
+    if(items && exchangeDate && listName){
         const itemList = await getItems()
         const listId = itemList[itemList.length - 1].list_id + 1
         for(i in items){
-            postItem({list_id: listId,name: items[i].name, url: items[i].url, exchange_date: exchangeDate.value})
+            postItem({list_id: listId, list_name: listName, name: items[i].name, url: items[i].url, exchange_date: exchangeDate.value})
         }
         users = await getUsers()
         currentUser = users[thisUser-1]
