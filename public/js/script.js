@@ -40,9 +40,10 @@ const postItem = async(itemObj) => {
 
 const newItem = {
     list_id: 1,
+    list_name: 'socklist',
     name: 'socks',
     url: 'https://amazon.com',
-    //exchange_date: 
+    exchange_date: '2024-01-19'
 }
 
 //postItem(newItem)

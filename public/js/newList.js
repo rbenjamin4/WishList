@@ -50,6 +50,7 @@ const addItem = () => {
 add.addEventListener('click', addItem)
 
 const finishList = async() => {
+    console.log(typeof(exchangeDate.value))
     if(items && exchangeDate && listName){
         const itemList = await getItems()
         let listId = 1
@@ -59,12 +60,25 @@ const finishList = async() => {
             }
         }
         for(i in items){
-            postItem({list_id: listId, list_name: listName, name: items[i].name, url: items[i].url, exchange_date: exchangeDate.value})
+            // console.log({
+            //     list_id: listId, 
+            //     list_name: listName.value, 
+            //     name: items[i].name, 
+            //     url: items[i].url, 
+            //     exchange_date: exchangeDate.value
+            // })
+            postItem({
+                list_id: listId, 
+                list_name: listName, 
+                name: items[i].name, 
+                url: items[i].url, 
+                exchange_date: exchangeDate.value
+            })
         }
         users = await getUsers()
         currentUser = users[thisUser-1]
         updateUser(thisUser, {owned_lists: currentUser.owned_lists + ',' + listId})
-        window.location.href = 'homePage.html'
+        //window.location.href = 'homePage.html'
     }
 }
 
