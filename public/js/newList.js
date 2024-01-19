@@ -52,7 +52,12 @@ add.addEventListener('click', addItem)
 const finishList = async() => {
     if(items && exchangeDate && listName){
         const itemList = await getItems()
-        const listId = itemList[itemList.length - 1].list_id + 1
+        let listId = 1
+        for(i in itemList){
+            if(itemList[i].list_id >= listId){
+                listId = itemList[i].list_id + 1
+            }
+        }
         for(i in items){
             postItem({list_id: listId, list_name: listName, name: items[i].name, url: items[i].url, exchange_date: exchangeDate.value})
         }
