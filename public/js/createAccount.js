@@ -58,15 +58,27 @@ myInput.onkeyup = function() {
   }
 }
 
-form.addEventListener('submit', (event) => {
+form.addEventListener('submit', async (event) => {
   event.preventDefault()
 
   const userObj = {
     username: username.value,
     password: myInput.value
   }
-  
+
+const userData = await getUsers()
+
+for (i in userData){
+ if(userData[i].username == username.value){
+ alert('This username already exists! Please create a different one.')
+ return
+}
+}
+
+
   postUsers(userObj)
+  alert('Your account has been created!')
+  window.location.href = 'homePage.html'
 })
 
 
