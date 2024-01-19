@@ -20,15 +20,16 @@ const postUsers = async(userObj) => {
     //console.log(data)
 }
 
-const newUser = {
-    //name: 'George',
-    username: 'George',
-    password: 'reallyInsecurePassword'
-}
+// const newUser = {
+//     //name: 'George',
+//     username: 'George',
+//     password: 'reallyInsecurePassword'
+// }
 
 // postUsers(newUser)
 
 const postItem = async(itemObj) => {
+    console.log(itemObj)
     const response = await fetch(`/api/items`, {
         method: 'POST',
         body: JSON.stringify(itemObj),
@@ -38,13 +39,13 @@ const postItem = async(itemObj) => {
     })
 }
 
-const newItem = {
-    list_id: 1,
-    list_name: 'socklist',
-    name: 'socks',
-    url: 'https://amazon.com',
-    exchange_date: '2024-01-19'
-}
+// const newItem = {
+//     list_id: 1,
+//     list_name: 'socklist',
+//     name: 'socks',
+//     url: 'https://amazon.com',
+//     exchange_date: '2024-01-19'
+// }
 
 //postItem(newItem)
 
