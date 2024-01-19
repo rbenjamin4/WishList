@@ -15,6 +15,10 @@ Item.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    list_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -27,9 +31,8 @@ Item.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    is_bought: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+    bought_by: {
+      type: DataTypes.INTEGER,
     },
     comment: {
       type: DataTypes.STRING,
