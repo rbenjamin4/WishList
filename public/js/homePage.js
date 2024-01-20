@@ -19,23 +19,30 @@ const welcomeUser = (userName) => {
 const displayMyList = (listName, expDate, numItems) => {
     const list = document.createElement("div");
     const listP = document.createElement("p");
+    const myListsButtonDiv = document.createElement("div");
     const viewButton = document.createElement("button");
+    const editButton = document.createElement("button");
     const deleteButton = document.createElement("button");
     list.setAttribute("class", "list");
     viewButton.setAttribute("class", "view-button");
+    editButton.setAttribute("class", "edit-button");
     deleteButton.setAttribute("class", "delete-button");
     listP.textContent = `My ${listName} list (exp. ${expDate}): ${numItems} items`;
     viewButton.textContent = "View";
+    editButton.textContent = "Edit";
     deleteButton.textContent = "Delete";
     myLists.appendChild(list);
-    list.appendChild(viewButton);
     list.appendChild(listP);
-    list.appendChild(deleteButton);
+    list.appendChild(myListsButtonDiv);
+    myListsButtonDiv.appendChild(viewButton);
+    myListsButtonDiv.appendChild(editButton);
+    myListsButtonDiv.appendChild(deleteButton);
 }
 
 const displayOtherList = (userName, listName, expDate, numItems) => {
     const list = document.createElement("div");
     const listP = document.createElement("p");
+    const otherListsButtonDiv = document.createElement("div");
     const viewButton = document.createElement("button");
     const removeButton = document.createElement("button");
     list.setAttribute("class", "list");
@@ -45,9 +52,10 @@ const displayOtherList = (userName, listName, expDate, numItems) => {
     viewButton.textContent = "View";
     removeButton.textContent = "Remove";
     otherLists.appendChild(list);
-    list.appendChild(viewButton);
     list.appendChild(listP);
-    list.appendChild(removeButton);
+    list.appendChild(otherListsButtonDiv);
+    otherListsButtonDiv.appendChild(viewButton);
+    otherListsButtonDiv.appendChild(removeButton);
 }
 
 //Example code for posting lists in my/other list lists
