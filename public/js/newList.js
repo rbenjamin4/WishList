@@ -9,7 +9,7 @@ const items = []
 const thisUser = 1 //change to user id if auth is added
 
 // const georgeUser = {
-//     name: 'George',
+//     //name: 'George',
 //     username: 'George',
 //     password: 'yr7hug'
 // }
@@ -50,7 +50,6 @@ const addItem = () => {
 add.addEventListener('click', addItem)
 
 const finishList = async() => {
-    console.log(typeof(exchangeDate.value))
     if(items && exchangeDate && listName){
         const itemList = await getItems()
         let listId = 1
@@ -60,16 +59,9 @@ const finishList = async() => {
             }
         }
         for(i in items){
-            // console.log({
-            //     list_id: listId, 
-            //     list_name: listName.value, 
-            //     name: items[i].name, 
-            //     url: items[i].url, 
-            //     exchange_date: exchangeDate.value
-            // })
             postItem({
                 list_id: listId, 
-                list_name: listName, 
+                list_name: listName.value, 
                 name: items[i].name, 
                 url: items[i].url, 
                 exchange_date: exchangeDate.value
@@ -77,8 +69,13 @@ const finishList = async() => {
         }
         users = await getUsers()
         currentUser = users[thisUser-1]
-        updateUser(thisUser, {owned_lists: currentUser.owned_lists + ',' + listId})
-        //window.location.href = 'homePage.html'
+        if(currentUser.owned_lists){
+            updateUser(thisUser, {owned_lists: currentUser.owned_lists + ',' + listId})
+        }else{
+            updateUser(thisUser, {owned_lists: listId})
+        }
+        alert(listName.value + ' created')
+        window.location.href = 'homePage.html'
     }
 }
 
