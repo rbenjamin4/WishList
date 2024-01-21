@@ -58,4 +58,37 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.post('/login', async (req, res) => {
+  try {
+    const userData = await User.findOne({
+      where: {
+        username: req.params.username
+      },
+    });
+    console.log(userData)
+
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
+
+    const validPassword = await userData.checkPassword(req.params.password);
+    console.log(validPassword)
+
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
+
+    res.json({ user: userData, message: 'You are now logged in!' });
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 module.exports = router;
