@@ -7,8 +7,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet" type="text/css">
-    <script src="./js/login.js" defer></script>
+    <link rel="stylesheet" href="./css/createAccount.css">
     <script src="./js/script.js" defer></script>
+    <script src="./js/login.js" defer></script>
     <title>Buy Me Things!</title>
 </head>
 <body>
@@ -23,17 +24,23 @@
         </nav>
     </header>
     <main>
-        <label for="username">Username:</label>
-        <input type="text" name="" id="username">
-        <br>
-        <br>
-        <label for="password">Password:</label>
-        <input type="text" name="" id="password">
-        <br>
-        <br>
-        <button>Login</button>
+        <div class="container">
+            <form>
+            <h2>LOGIN</h2>
+              <p class="parText">Please login with your username and password</p>
+      
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" required>
+      
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password">
+      
+              <input type="submit" value="Submit">
+              <p>Not already a user? Create a <a class="accountLink" href="./createAccount.html">new account</a></p>
 
-        <p>Not already a user? Create a <a href="#">new account</a></p> 
+            </form>
+          </div> 
+
     </main>
     <footer>
         
