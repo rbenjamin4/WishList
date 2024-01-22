@@ -32,4 +32,3 @@ form.addEventListener('submit', async (event) => {
 // set user as logged in
 
 // redirect to home page (list of lists)
-
