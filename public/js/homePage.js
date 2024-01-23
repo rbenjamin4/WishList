@@ -59,8 +59,18 @@ const displayOtherList = (userName, listName, expDate, numItems) => {
 }
 
 //Example code for posting lists in my/other list lists
-let userName = "Frederico35";
-welcomeUser(userName);
+//let userName = "Frederico35";
+const getUsername = async() => {
+    users = await getUsers()
+    for(i in users){
+        if(users[i].id == currentUser){
+            const userName =  users[i].username
+            welcomeUser(userName)
+        }
+    }
+}
+getUsername();
+//welcomeUser(userName);
 displayMyList("Christmas", "12/25/2024", "10");
 displayMyList("Thanksgiving", "11/22/2024", "1");
 displayMyList("Fourth of July", "7/4/2024", "3");

@@ -15,6 +15,7 @@ form.addEventListener('submit', async (event) => {
     console.log(userData)
     for (i in userData) {
         if (userData[i].username == username.value && userData[i].password == password.value) {
+            sessionStorage.setItem('userId', userData[i].id)
             window.location.href = 'homePage.html'
             flag = true
         }

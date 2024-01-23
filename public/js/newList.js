@@ -6,7 +6,7 @@ const exchangeDate = document.querySelector('#exchangeDate')
 const listName = document.querySelector('#listName')
 const finish = document.querySelector('#finish')
 const items = []
-const thisUser = 1 //change to user id if auth is added
+const thisUser = currentUser
 
 // const georgeUser = {
 //     //name: 'George',
