@@ -1,45 +1,40 @@
-//Needs to retrieve information about the user's username
-//Needs to retrieve database information about owned lists and shared lists
-    //Including: each shared list's username, and the listName, expirationDate, and number of Items for each list 
 
-//Uses functions to display this information as "lists of lists" for "my lists", and "lists I'm watching"
-
-//Create new list button will link to newList.html
 
 const welcome = document.querySelector("#welcome");
 const myLists = document.querySelector("#my-lists");
 const otherLists = document.querySelector("#other-lists");
 const newListButton = document.querySelector("#new-list-button");
 
+const sendToNewList = () => {
+    window.location.href = "newList.html";
+}
+
+newListButton.addEventListener("click", sendToNewList);
+
 const welcomeUser = (userName) => {
     welcome.textContent = `Welcome back, ${userName}`;
 }
 
-
-const displayMyList = (listName, expDate, numItems) => {
+const displayOwnedList = (listName, expDate, numItems) => {
     const list = document.createElement("div");
     const listP = document.createElement("p");
     const myListsButtonDiv = document.createElement("div");
-    const viewButton = document.createElement("button");
-    const editButton = document.createElement("button");
+    const viewEditButton = document.createElement("button");
     const deleteButton = document.createElement("button");
     list.setAttribute("class", "list");
-    viewButton.setAttribute("class", "view-button");
-    editButton.setAttribute("class", "edit-button");
+    viewEditButton.setAttribute("class", "view-button");
     deleteButton.setAttribute("class", "delete-button");
     listP.textContent = `My ${listName} list (exp. ${expDate}): ${numItems} items`;
-    viewButton.textContent = "View";
-    editButton.textContent = "Edit";
+    viewEditButton.textContent = "View/Edit";
     deleteButton.textContent = "Delete";
     myLists.appendChild(list);
     list.appendChild(listP);
     list.appendChild(myListsButtonDiv);
-    myListsButtonDiv.appendChild(viewButton);
-    myListsButtonDiv.appendChild(editButton);
+    myListsButtonDiv.appendChild(viewEditButton);
     myListsButtonDiv.appendChild(deleteButton);
 }
 
-const displayOtherList = (userName, listName, expDate, numItems) => {
+const displaySharedList = (listUserName, listName, expDate, numItems) => {
     const list = document.createElement("div");
     const listP = document.createElement("p");
     const otherListsButtonDiv = document.createElement("div");
@@ -48,7 +43,7 @@ const displayOtherList = (userName, listName, expDate, numItems) => {
     list.setAttribute("class", "list");
     viewButton.setAttribute("class", "view-button");
     removeButton.setAttribute("class", "remove-button");
-    listP.textContent = `${userName}'s ${listName} list (exp. ${expDate}): ${numItems} items`;
+    listP.textContent = `${listUserName}'s ${listName} list (exp. ${expDate}): ${numItems} items`;
     viewButton.textContent = "View";
     removeButton.textContent = "Remove";
     otherLists.appendChild(list);
@@ -58,13 +53,103 @@ const displayOtherList = (userName, listName, expDate, numItems) => {
     otherListsButtonDiv.appendChild(removeButton);
 }
 
-//Example code for posting lists in my/other list lists
-let userName = "Frederico35";
-welcomeUser(userName);
-displayMyList("Christmas", "12/25/2024", "10");
-displayMyList("Thanksgiving", "11/22/2024", "1");
-displayMyList("Fourth of July", "7/4/2024", "3");
-displayMyList("Just buy me things", "1/17/2024", "100");
-displayOtherList("Tim35", "birthday", "5/31/2024", "8");
-displayOtherList("PatrickLikesSnakes", "President's day", "2/19/2024", "45");
-displayOtherList("YMCAGymMaster11", "Gym Party", "5/3/2024", "9");
+//Returns username based on user id accessed from session storage. Runs welcome function based on username.
+const getUsername = async() => {
+    let users = await getUsers()
+    for(i in users){
+        if(users[i].id == currentUser){
+            const userName =  users[i].username
+            welcomeUser(userName);
+        }
+    }
+}
+
+//gets the username of the list owner of a shared list for display
+const getListOwnerUsernameById = async(listId) => {
+    let listOwnerUsername;
+    const object = await getUsers();
+    for(let i = 0; i < object.length; i++){
+        if(object[i].owned_lists){
+            if(object[i].owned_lists.includes(listId)){
+                listOwnerUsername = object[i].username;
+            }
+        }
+    }
+    console.log(listOwnerUsername)
+    return listOwnerUsername;
+}
+
+
+//takes owned list id, sends 3 required fields to display owned list function
+const makeOwnedListFromItems = async(listId) => {
+    let listName;
+    let expDate;
+    let numItems = 0;
+    let object = await getItems();
+    for(let i = 0; i < object.length; i++){
+        if(object[i].list_id == listId){
+            listName = object[i].list_name;
+            expDate = dayjs(object[i].exchange_date).format("MMMM D, YYYY");
+            numItems++;
+        }
+    }
+    displayOwnedList(listName, expDate, numItems);
+}
+
+//takes shared list id, sends 3 required fields to display shared list function
+const makeSharedListFromItems = async(listId) => {
+    let ownerUsername = await getListOwnerUsernameById(listId);
+    let listName;
+    let expDate;
+    let numItems = 0;
+    let object = await getItems();
+    for(let i = 0; i < object.length; i++){
+        if(object[i].list_id == listId){
+            listName = object[i].list_name;
+            expDate = dayjs(object[i].exchange_date).format("MMMM D, YYYY");
+            numItems++;
+        }
+    }
+    displaySharedList(ownerUsername, listName, expDate, numItems);
+}
+
+//Gets owned and shared lists for user by id. Returns array where index 0 is owned lists and index 1 is shared lists (false if no lists)
+const getUserListsInfoById = async (userId) => {
+    const object = await getUsers();
+    let listsArray = [];
+    let ownedLists;
+    let sharedLists;
+    for(let i = 0; i < object.length; i++){
+        if(object[i].id == userId){
+            if(object[i].owned_lists){
+                ownedLists = object[i].owned_lists;
+            } else {
+                ownedLists = false;
+            }
+            if(object[i].shared_lists){
+                sharedLists = object[i].shared_lists;
+            } else {
+                sharedLists = false;
+            }
+            listsArray.push(ownedLists);
+            listsArray.push(sharedLists);
+        }
+    }
+    if(listsArray[0]){
+        let userListsArray = listsArray[0].split(',');
+        for(let i = 0; i < userListsArray.length; i++){
+            makeOwnedListFromItems(userListsArray[i]);
+        }
+    }
+    if(listsArray[1]){
+        let userListsArray = listsArray[0].split(',');
+        for(let i = 0; i < userListsArray.length; i++){
+            makeSharedListFromItems(userListsArray[i]);
+        }
+    }
+}
+
+getUsername();
+getUserListsInfoById(currentUser);
+
+
