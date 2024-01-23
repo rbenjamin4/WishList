@@ -59,25 +59,16 @@ const displaySharedList = (listUserName, listName, expDate, numItems) => {
 }
 
 //Example code for posting lists in my/other list lists
-//let userName = "Frederico35";
 const getUsername = async() => {
     users = await getUsers()
     for(i in users){
         if(users[i].id == currentUser){
             const userName =  users[i].username
-            welcomeUser(userName)
+            welcomeUser(userName);
+            return userName;
         }
     }
 }
-getUsername();
-//welcomeUser(userName);
-displayMyList("Christmas", "12/25/2024", "10");
-displayMyList("Thanksgiving", "11/22/2024", "1");
-displayMyList("Fourth of July", "7/4/2024", "3");
-displayMyList("Just buy me things", "1/17/2024", "100");
-displayOtherList("Tim35", "birthday", "5/31/2024", "8");
-displayOtherList("PatrickLikesSnakes", "President's day", "2/19/2024", "45");
-displayOtherList("YMCAGymMaster11", "Gym Party", "5/3/2024", "9");
 
 //gets the username of the list owner of a shared list for display
 //----------------Needs code to deal with multiple owned lists--------------//
@@ -139,8 +130,6 @@ const makeSharedListFromItems = async(listId) => {
     displaySharedList(sharedListArray[0], sharedListArray[1], sharedListArray[2], sharedListArray[3]);
 }
 
-
-
 //Gets owned and shared lists for user by id. Returns array where index 0 is owned lists and index 1 is shared lists (false if no lists)
 const getUserListsInfoById = async (userId) => {
     const object = await getUsers();
@@ -183,15 +172,20 @@ const getUserListsFromUserName = async(userName) => {
 const displayListsFromUsername = async(userName) => {
     let userLists = await getUserListsFromUserName(userName);
     if(userLists[0]){
-        makeOwnedListFromItems(userLists[0]);
+        let userListsArray = userLists[0].split(',');
+        for(let i = 0; i < userListsArray.length; i++){
+            makeOwnedListFromItems(userListsArray[i]);
+        }
     }
     if(userLists[1]){
-        makeSharedListFromItems(userLists[1]);
+        let userListsArray = userLists[0].split(',');
+        for(let i = 0; i < userListsArray.length; i++){
+            makeSharedListFromItems(userListsArray[i]);
+        }
     }
 }
 
-let userName = "fefefvsdvsv";
-welcomeUser(userName);
+let userName = "BryTheGuy";
 displayListsFromUsername(userName);
 
 
