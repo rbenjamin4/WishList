@@ -1,41 +1,36 @@
-//Needs to retrieve information about the user's username
-//Needs to retrieve database information about owned lists and shared lists
-    //Including: each shared list's username, and the listName, expirationDate, and number of Items for each list 
 
-//Uses functions to display this information as "lists of lists" for "my lists", and "lists I'm watching"
-
-//Create new list button will link to newList.html
 
 const welcome = document.querySelector("#welcome");
 const myLists = document.querySelector("#my-lists");
 const otherLists = document.querySelector("#other-lists");
 const newListButton = document.querySelector("#new-list-button");
 
+const sendToNewList = () => {
+    window.location.href = "newList.html";
+}
+
+newListButton.addEventListener("click", sendToNewList);
+
 const welcomeUser = (userName) => {
     welcome.textContent = `Welcome back, ${userName}`;
 }
-
 
 const displayOwnedList = (listName, expDate, numItems) => {
     const list = document.createElement("div");
     const listP = document.createElement("p");
     const myListsButtonDiv = document.createElement("div");
-    const viewButton = document.createElement("button");
-    const editButton = document.createElement("button");
+    const viewEditButton = document.createElement("button");
     const deleteButton = document.createElement("button");
     list.setAttribute("class", "list");
-    viewButton.setAttribute("class", "view-button");
-    editButton.setAttribute("class", "edit-button");
+    viewEditButton.setAttribute("class", "view-button");
     deleteButton.setAttribute("class", "delete-button");
     listP.textContent = `My ${listName} list (exp. ${expDate}): ${numItems} items`;
-    viewButton.textContent = "View";
-    editButton.textContent = "Edit";
+    viewEditButton.textContent = "View/Edit";
     deleteButton.textContent = "Delete";
     myLists.appendChild(list);
     list.appendChild(listP);
     list.appendChild(myListsButtonDiv);
-    myListsButtonDiv.appendChild(viewButton);
-    myListsButtonDiv.appendChild(editButton);
+    myListsButtonDiv.appendChild(viewEditButton);
     myListsButtonDiv.appendChild(deleteButton);
 }
 
@@ -60,12 +55,11 @@ const displaySharedList = (listUserName, listName, expDate, numItems) => {
 
 //Returns username based on user id accessed from session storage. Runs welcome function based on username.
 const getUsername = async() => {
-    users = await getUsers()
+    let users = await getUsers()
     for(i in users){
         if(users[i].id == currentUser){
             const userName =  users[i].username
             welcomeUser(userName);
-            return userName;
         }
     }
 }
@@ -141,26 +135,21 @@ const getUserListsInfoById = async (userId) => {
             listsArray.push(sharedLists);
         }
     }
-    return listsArray;
-}
-
-const displayListsFromUsername = async(userId) => {
-    let userLists = await getUserListsInfoById(userId);
-    if(userLists[0]){
-        let userListsArray = userLists[0].split(',');
+    if(listsArray[0]){
+        let userListsArray = listsArray[0].split(',');
         for(let i = 0; i < userListsArray.length; i++){
             makeOwnedListFromItems(userListsArray[i]);
         }
     }
-    if(userLists[1]){
-        let userListsArray = userLists[0].split(',');
+    if(listsArray[1]){
+        let userListsArray = listsArray[0].split(',');
         for(let i = 0; i < userListsArray.length; i++){
             makeSharedListFromItems(userListsArray[i]);
         }
     }
 }
 
-let userName = "BryTheGuy";
-displayListsFromUsername(1);
+getUsername();
+getUserListsInfoById(currentUser);
 
 
