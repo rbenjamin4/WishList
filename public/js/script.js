@@ -142,17 +142,3 @@ const updateItem = async(id, newItemObj) => {
     })
 }
 // updateTrip(1, newTrip)
-
-const login = async (username, password) => {
-    const response = await fetch(`/api/users/login`, {
-        method: 'POST',
-        body: JSON.stringify({username, password}),
-        headers:{
-            'Content-Type' : 'application/json'
-        }
-    })
-    console.log(response.statusText)
-    if(response.ok){
-        window.location.href = 'homePage.html'
-    }
-}
