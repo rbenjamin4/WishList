@@ -58,7 +58,7 @@ const displaySharedList = (listUserName, listName, expDate, numItems) => {
     otherListsButtonDiv.appendChild(removeButton);
 }
 
-//Example code for posting lists in my/other list lists
+//Returns username based on user id accessed from session storage. Runs welcome function based on username.
 const getUsername = async() => {
     users = await getUsers()
     for(i in users){
@@ -71,7 +71,6 @@ const getUsername = async() => {
 }
 
 //gets the username of the list owner of a shared list for display
-//----------------Needs code to deal with multiple owned lists--------------//
 const getListOwnerUsernameById = async(listId) => {
     let listOwnerUsername;
     const object = await getUsers();
@@ -89,7 +88,6 @@ const getListOwnerUsernameById = async(listId) => {
 
 //takes owned list id, sends 3 required fields to display owned list function
 const makeOwnedListFromItems = async(listId) => {
-    let ownedListArray = [];
     let listName;
     let expDate;
     let numItems = 0;
@@ -101,16 +99,11 @@ const makeOwnedListFromItems = async(listId) => {
             numItems++;
         }
     }
-    ownedListArray.push(listName);
-    ownedListArray.push(expDate);
-    ownedListArray.push(numItems);
-    console.log(ownedListArray);
-    displayOwnedList(ownedListArray[0], ownedListArray[1], ownedListArray[2]);
+    displayOwnedList(listName, expDate, numItems);
 }
 
 //takes shared list id, sends 3 required fields to display shared list function
 const makeSharedListFromItems = async(listId) => {
-    let sharedListArray = [];
     let ownerUsername = await getListOwnerUsernameById(listId);
     let listName;
     let expDate;
@@ -123,11 +116,7 @@ const makeSharedListFromItems = async(listId) => {
             numItems++;
         }
     }
-    sharedListArray.push(ownerUsername);
-    sharedListArray.push(listName);
-    sharedListArray.push(expDate);
-    sharedListArray.push(numItems);
-    displaySharedList(sharedListArray[0], sharedListArray[1], sharedListArray[2], sharedListArray[3]);
+    displaySharedList(ownerUsername, listName, expDate, numItems);
 }
 
 //Gets owned and shared lists for user by id. Returns array where index 0 is owned lists and index 1 is shared lists (false if no lists)
@@ -152,25 +141,11 @@ const getUserListsInfoById = async (userId) => {
             listsArray.push(sharedLists);
         }
     }
-    console.log(listsArray);
     return listsArray;
 }
 
-const getUserListsFromUserName = async(userName) => {
-    const object = await getUsers();
-    let userId;
-    for(let i = 0; i < object.length; i++){
-        if(object[i].username == userName){
-            userId = object[i].id;
-        }
-    }
+const displayListsFromUsername = async(userId) => {
     let userLists = await getUserListsInfoById(userId);
-    console.log(userLists);
-    return userLists;
-}
-
-const displayListsFromUsername = async(userName) => {
-    let userLists = await getUserListsFromUserName(userName);
     if(userLists[0]){
         let userListsArray = userLists[0].split(',');
         for(let i = 0; i < userListsArray.length; i++){
@@ -186,6 +161,6 @@ const displayListsFromUsername = async(userName) => {
 }
 
 let userName = "BryTheGuy";
-displayListsFromUsername(userName);
+displayListsFromUsername(1);
 
 
