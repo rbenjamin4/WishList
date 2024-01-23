@@ -1,10 +1,31 @@
-//Gets information from user and list database:
-    //user DB: username
-    //list DB: list name, expiration date, name + url of item
+//Gets information from session storage:
+    //username
+    //current list_id of list to be viewed
+    //(Will enter your username into the DB is_bought field if you click "buy");
+    //If you unclick "buy" it will remove your username from the is_bought field
 
-//Displays the list
+//Displays all the items in the list
 
 //Should display a preview of what the item looks like
 
-//Edit button that links to edit button page, back to homepage button
+const list = document.querySelector("#list");
+
+const displayList = async(listId) => {
+    const object = await getList();
+
+    for(let i = 0; i < object.length; i++){
+        if(object[i].list_id == listId){
+            let listName; 
+            let expDate;
+            let itemName;
+            let itemUrl;
+        }
+    }
+
+    
+    
+
+}
+
+displayList(2);
 
