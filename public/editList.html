@@ -9,7 +9,7 @@
     <link href="./css/style.css" rel="stylesheet" type="text/css">
     <script src="./js/session.js" defer></script>
     <script src="./js/script.js" defer></script>
-    <script src="./js/newList.js" defer></script>
+    <script src="./js/editList.js" defer></script>
     <title>Buy Me Things!</title>
 </head>
 <body>
@@ -24,8 +24,10 @@
         </nav>
     </header>
     <main>
-        <label for="listName">List Name</label>
-        <input type="text" id="listName">
+        <h1 id="listName"></h1>
+        <label for="sharedWith">Enter your friend's username to share list</label>
+        <input type="text" id="otherUsername">
+        <button id="share">Share</button>
         <div id="list">
             <label for="itemName">Item Name</label>
             <input type="text" id="itemName">
@@ -33,9 +35,6 @@
             <input type="text" id="itemUrl">
             <button id="add">Add new Item to list</button>
         </div>
-        <label for="exchangeDate">Gift Exchange Date:</label>
-        <input type="date" id="exchangeDate">
-        <button id="finish">Create List</button>
     </main>
     <footer>
         
