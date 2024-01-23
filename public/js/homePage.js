@@ -1,41 +1,36 @@
-//Needs to retrieve information about the user's username
-//Needs to retrieve database information about owned lists and shared lists
-    //Including: each shared list's username, and the listName, expirationDate, and number of Items for each list 
 
-//Uses functions to display this information as "lists of lists" for "my lists", and "lists I'm watching"
-
-//Create new list button will link to newList.html
 
 const welcome = document.querySelector("#welcome");
 const myLists = document.querySelector("#my-lists");
 const otherLists = document.querySelector("#other-lists");
 const newListButton = document.querySelector("#new-list-button");
 
+const sendToNewList = () => {
+    window.location.href = "newList.html";
+}
+
+newListButton.addEventListener("click", sendToNewList);
+
 const welcomeUser = (userName) => {
     welcome.textContent = `Welcome back, ${userName}`;
 }
-
 
 const displayOwnedList = (listName, expDate, numItems) => {
     const list = document.createElement("div");
     const listP = document.createElement("p");
     const myListsButtonDiv = document.createElement("div");
-    const viewButton = document.createElement("button");
-    const editButton = document.createElement("button");
+    const viewEditButton = document.createElement("button");
     const deleteButton = document.createElement("button");
     list.setAttribute("class", "list");
-    viewButton.setAttribute("class", "view-button");
-    editButton.setAttribute("class", "edit-button");
+    viewEditButton.setAttribute("class", "view-button");
     deleteButton.setAttribute("class", "delete-button");
     listP.textContent = `My ${listName} list (exp. ${expDate}): ${numItems} items`;
-    viewButton.textContent = "View";
-    editButton.textContent = "Edit";
+    viewEditButton.textContent = "View/Edit";
     deleteButton.textContent = "Delete";
     myLists.appendChild(list);
     list.appendChild(listP);
     list.appendChild(myListsButtonDiv);
-    myListsButtonDiv.appendChild(viewButton);
-    myListsButtonDiv.appendChild(editButton);
+    myListsButtonDiv.appendChild(viewEditButton);
     myListsButtonDiv.appendChild(deleteButton);
 }
 
@@ -58,29 +53,18 @@ const displaySharedList = (listUserName, listName, expDate, numItems) => {
     otherListsButtonDiv.appendChild(removeButton);
 }
 
-//Example code for posting lists in my/other list lists
-//let userName = "Frederico35";
+//Returns username based on user id accessed from session storage. Runs welcome function based on username.
 const getUsername = async() => {
-    users = await getUsers()
+    let users = await getUsers()
     for(i in users){
         if(users[i].id == currentUser){
             const userName =  users[i].username
-            welcomeUser(userName)
+            welcomeUser(userName);
         }
     }
 }
-getUsername();
-//welcomeUser(userName);
-displayMyList("Christmas", "12/25/2024", "10");
-displayMyList("Thanksgiving", "11/22/2024", "1");
-displayMyList("Fourth of July", "7/4/2024", "3");
-displayMyList("Just buy me things", "1/17/2024", "100");
-displayOtherList("Tim35", "birthday", "5/31/2024", "8");
-displayOtherList("PatrickLikesSnakes", "President's day", "2/19/2024", "45");
-displayOtherList("YMCAGymMaster11", "Gym Party", "5/3/2024", "9");
 
 //gets the username of the list owner of a shared list for display
-//----------------Needs code to deal with multiple owned lists--------------//
 const getListOwnerUsernameById = async(listId) => {
     let listOwnerUsername;
     const object = await getUsers();
@@ -98,7 +82,6 @@ const getListOwnerUsernameById = async(listId) => {
 
 //takes owned list id, sends 3 required fields to display owned list function
 const makeOwnedListFromItems = async(listId) => {
-    let ownedListArray = [];
     let listName;
     let expDate;
     let numItems = 0;
@@ -110,16 +93,11 @@ const makeOwnedListFromItems = async(listId) => {
             numItems++;
         }
     }
-    ownedListArray.push(listName);
-    ownedListArray.push(expDate);
-    ownedListArray.push(numItems);
-    console.log(ownedListArray);
-    displayOwnedList(ownedListArray[0], ownedListArray[1], ownedListArray[2]);
+    displayOwnedList(listName, expDate, numItems);
 }
 
 //takes shared list id, sends 3 required fields to display shared list function
 const makeSharedListFromItems = async(listId) => {
-    let sharedListArray = [];
     let ownerUsername = await getListOwnerUsernameById(listId);
     let listName;
     let expDate;
@@ -132,14 +110,8 @@ const makeSharedListFromItems = async(listId) => {
             numItems++;
         }
     }
-    sharedListArray.push(ownerUsername);
-    sharedListArray.push(listName);
-    sharedListArray.push(expDate);
-    sharedListArray.push(numItems);
-    displaySharedList(sharedListArray[0], sharedListArray[1], sharedListArray[2], sharedListArray[3]);
+    displaySharedList(ownerUsername, listName, expDate, numItems);
 }
-
-
 
 //Gets owned and shared lists for user by id. Returns array where index 0 is owned lists and index 1 is shared lists (false if no lists)
 const getUserListsInfoById = async (userId) => {
@@ -163,35 +135,21 @@ const getUserListsInfoById = async (userId) => {
             listsArray.push(sharedLists);
         }
     }
-    console.log(listsArray);
-    return listsArray;
-}
-
-const getUserListsFromUserName = async(userName) => {
-    const object = await getUsers();
-    let userId;
-    for(let i = 0; i < object.length; i++){
-        if(object[i].username == userName){
-            userId = object[i].id;
+    if(listsArray[0]){
+        let userListsArray = listsArray[0].split(',');
+        for(let i = 0; i < userListsArray.length; i++){
+            makeOwnedListFromItems(userListsArray[i]);
         }
     }
-    let userLists = await getUserListsInfoById(userId);
-    console.log(userLists);
-    return userLists;
-}
-
-const displayListsFromUsername = async(userName) => {
-    let userLists = await getUserListsFromUserName(userName);
-    if(userLists[0]){
-        makeOwnedListFromItems(userLists[0]);
-    }
-    if(userLists[1]){
-        makeSharedListFromItems(userLists[1]);
+    if(listsArray[1]){
+        let userListsArray = listsArray[0].split(',');
+        for(let i = 0; i < userListsArray.length; i++){
+            makeSharedListFromItems(userListsArray[i]);
+        }
     }
 }
 
-let userName = "fefefvsdvsv";
-welcomeUser(userName);
-displayListsFromUsername(userName);
+getUsername();
+getUserListsInfoById(currentUser);
 
 
