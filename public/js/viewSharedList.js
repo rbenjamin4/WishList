@@ -30,7 +30,7 @@ const getListOwnerUsernameById = async(listId) => {
 const listOwnerUsername = getListOwnerUsernameById(exampleListId);
 
 const welcomeUser = (userName, listOwnerUsername) => {
-    welcome.textContent = `Hello ${userName}! ${listOwnerUsername} shared this list with you:`;
+    welcome.textContent = `Hello ${userName}! ${listOwnerUsername} shared their list with you:`;
 }
 
 const getUsername = async() => {
@@ -38,7 +38,8 @@ const getUsername = async() => {
     for(i in users){
         if(users[i].id == currentUser){
             const userName =  users[i].username
-            welcomeUser(userName);
+            const listOwnerUsername = await getListOwnerUsernameById(exampleListId);
+            welcomeUser(userName, listOwnerUsername);
         }
     }
 }
@@ -101,7 +102,8 @@ const displayList = async(listId) => {
             let itemUrlP = document.createElement("p");
             itemUrlP.textContent = itemUrl;
             let boughtByContentsDiv = document.createElement("div");
-            boughtByContentsDiv.innerHTML = await handleBoughtByStatus(itemIndex);
+            let boughtStatus = await handleBoughtByStatus(itemIndex);
+            boughtByContentsDiv.appendChild(boughtStatus);
             itemDiv.appendChild(itemNameP);
             itemDiv.appendChild(itemUrlP);
             itemDiv.appendChild(boughtByContentsDiv);

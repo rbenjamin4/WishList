@@ -47,7 +47,7 @@ button {
     display: flex;
     justify-content: space-between;
     background-color: var(--green);
-    border: 1px var(--black) solid;
-    padding: 3px;
-    margin: 3px;
+    border: 5px black solid;
+    padding: 5px;
+    margin: 5px;
 }
