@@ -58,6 +58,27 @@ const displaySharedList = (listUserName, listName, expDate, numItems) => {
     otherListsButtonDiv.appendChild(removeButton);
 }
 
+//Example code for posting lists in my/other list lists
+//let userName = "Frederico35";
+const getUsername = async() => {
+    users = await getUsers()
+    for(i in users){
+        if(users[i].id == currentUser){
+            const userName =  users[i].username
+            welcomeUser(userName)
+        }
+    }
+}
+getUsername();
+//welcomeUser(userName);
+displayMyList("Christmas", "12/25/2024", "10");
+displayMyList("Thanksgiving", "11/22/2024", "1");
+displayMyList("Fourth of July", "7/4/2024", "3");
+displayMyList("Just buy me things", "1/17/2024", "100");
+displayOtherList("Tim35", "birthday", "5/31/2024", "8");
+displayOtherList("PatrickLikesSnakes", "President's day", "2/19/2024", "45");
+displayOtherList("YMCAGymMaster11", "Gym Party", "5/3/2024", "9");
+
 //gets the username of the list owner of a shared list for display
 //----------------Needs code to deal with multiple owned lists--------------//
 const getListOwnerUsernameById = async(listId) => {

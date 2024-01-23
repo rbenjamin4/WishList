@@ -77,6 +77,12 @@ for (i in userData){
 
 
   postUsers(userObj)
+  users = await getUsers()
+  for(i in users){
+    if(users[i].username === username.value){
+      sessionStorage.setItem('userId', users[i].id)
+    }
+  }
   alert('Your account has been created!')
   window.location.href = 'homePage.html'
 })
