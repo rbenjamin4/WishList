@@ -70,7 +70,7 @@ const getListOwnerUsernameById = async(listId) => {
     const object = await getUsers();
     for(let i = 0; i < object.length; i++){
         if(object[i].owned_lists){
-            if(object[i].owned_lists.includes(listId)){
+            if(object[i].owned_lists.split(",").includes(listId)){  //////////////////////////////issue
                 listOwnerUsername = object[i].username;
             }
         }

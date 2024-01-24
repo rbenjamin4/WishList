@@ -1,12 +1,3 @@
-//Gets information from session storage:
-    //username
-    //current list_id of list to be viewed
-    //(Will enter your username into the DB is_bought field if you click "buy");
-    //If you unclick "buy" it will remove your username from the is_bought field
-
-//Displays all the items in the list
-//Should display a preview of what the item looks like
-
 const exampleListId = 1;
 
 const list = document.querySelector("#list");
@@ -18,7 +9,7 @@ const getListOwnerUsernameById = async(listId) => {
     const object = await getUsers();
     for(let i = 0; i < object.length; i++){
         if(object[i].owned_lists){
-            if(object[i].owned_lists.includes(listId)){
+            if(object[i].owned_lists.split(",").includes(listId)){ //////////////////////////////issue
                 listOwnerUsername = object[i].username;
             }
         }
@@ -82,7 +73,7 @@ const handleBoughtByStatus = async(itemIndex) => {
         } else {
             console.log("bought by another user");
             let alreadyBought = document.createElement("p");
-            alreadyBought.textContent = "Item has been purchased";
+            alreadyBought.textContent = "Already bought";
             boughtByContents = alreadyBought;
         }
     return boughtByContents;
