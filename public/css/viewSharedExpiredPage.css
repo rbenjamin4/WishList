@@ -1,0 +1,53 @@
+/*Universal Styles*/
+:root {
+    --pink: #DA258D;
+    --green: #8DDA25;
+    --blue: #258DDA;
+    --black: #000000;
+    --white: #ffffff;
+}
+
+/*Welcome Message text*/
+h3 {
+    font-size: 3rem;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+#list-section {
+    display: flex;
+    justify-content: center;
+}
+
+#list {
+    background-color: var(--white);
+    height: 400px;
+    width: 600px;
+    margin: 10px;
+    border: solid black 5px;
+    text-align: center;
+}
+
+#list-title {
+    font-size: 2rem;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background-color: var(--pink);
+    border-bottom: 5px var(--black) solid;
+}
+
+button {
+    color: var(--black);
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    padding: 2px;
+    margin-left: 3px;
+}
+
+.item-div {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--green);
+    border: 5px black solid;
+    padding: 5px;
+    margin: 5px;
+}
