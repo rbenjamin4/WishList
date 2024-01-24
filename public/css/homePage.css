@@ -65,3 +65,13 @@ h4 {
     padding: 2px;
     margin-left: 3px;
 }
+
+/*Code for expired list display on home page*/
+.expired-list {
+    border: 5px red solid;
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--green);
+}
