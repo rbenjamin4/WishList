@@ -1,4 +1,4 @@
-/*Universal Styles*/
+
 :root {
     --pink: #DA258D;
     --green: #8DDA25;
@@ -7,7 +7,7 @@
     --white: #ffffff;
 }
 
-/*Welcome Back text*/
+
 h3 {
     font-size: 3rem;
     font-family: 'Times New Roman', Times, serif;
@@ -43,7 +43,7 @@ h3 {
     background-color: var(--white);
 }
 
-/*Lists text*/
+
 h4 {
     font-size: 2.5rem;
     font-family: Georgia, 'Times New Roman', Times, serif;

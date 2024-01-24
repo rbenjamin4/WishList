@@ -8,13 +8,13 @@ const finish = document.querySelector('#finish')
 const items = []
 const thisUser = currentUser
 
-// const georgeUser = {
-//     //name: 'George',
-//     username: 'George',
-//     password: 'yr7hug'
-// }
-// console.log(georgeUser)
-// postUsers(georgeUser)
+
+
+
+
+
+
+
 
 const addItem = () => {
     if(itemName.value && itemUrl.value){

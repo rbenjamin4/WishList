@@ -4,7 +4,7 @@ const loginBtn = document.getElementById('submit')
 const form = document.querySelector("form")
 
 
-// verify login info to match user in database
+
 form.addEventListener('submit', async (event) => {
 
     event.preventDefault()
@@ -30,6 +30,5 @@ form.addEventListener('submit', async (event) => {
 )
 
 
-// set user as logged in
 
-// redirect to home page (list of lists)
+

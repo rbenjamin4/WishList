@@ -53,7 +53,7 @@ const displaySharedList = (listUserName, listName, expDate, numItems) => {
     otherListsButtonDiv.appendChild(removeButton);
 }
 
-//Returns username based on user id accessed from session storage. Runs welcome function based on username.
+
 const getUsername = async() => {
     let users = await getUsers()
     for(i in users){
@@ -64,7 +64,7 @@ const getUsername = async() => {
     }
 }
 
-//gets the username of the list owner of a shared list for display
+
 const getListOwnerUsernameById = async(listId) => {
     let listOwnerUsername;
     const object = await getUsers();
@@ -80,7 +80,7 @@ const getListOwnerUsernameById = async(listId) => {
 }
 
 
-//takes owned list id, sends 3 required fields to display owned list function
+
 const makeOwnedListFromItems = async(listId) => {
     let listName;
     let expDate;
@@ -96,7 +96,7 @@ const makeOwnedListFromItems = async(listId) => {
     displayOwnedList(listName, expDate, numItems);
 }
 
-//takes shared list id, sends 3 required fields to display shared list function
+
 const makeSharedListFromItems = async(listId) => {
     let ownerUsername = await getListOwnerUsernameById(listId);
     let listName;
@@ -113,7 +113,7 @@ const makeSharedListFromItems = async(listId) => {
     displaySharedList(ownerUsername, listName, expDate, numItems);
 }
 
-//Gets owned and shared lists for user by id. Returns array where index 0 is owned lists and index 1 is shared lists (false if no lists)
+
 const getUserListsInfoById = async (userId) => {
     const object = await getUsers();
     let listsArray = [];
