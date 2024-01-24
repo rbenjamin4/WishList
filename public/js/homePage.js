@@ -24,7 +24,7 @@ const sendToViewExpiredList = (listId) => {
     window.location.href = "viewExpiredList.html";
 }
 
-const sendToEditList = () => {
+const sendToEditList = (listId) => {
     sessionStorage.setItem('listId', listId);
     window.location.href = "editList.html";
 }
@@ -199,7 +199,7 @@ const getUserListsInfoById = async (userId) => {
         }
     }
     if(listsArray[1]){
-        let userListsArray = listsArray[0].split(',');
+        let userListsArray = listsArray[1].split(',');
         for(let i = 0; i < userListsArray.length; i++){
             makeSharedListFromItems(userListsArray[i]);
         }
