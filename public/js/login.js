@@ -3,6 +3,9 @@ const password = document.getElementById('password')
 const loginBtn = document.getElementById('submit')
 const form = document.querySelector("form")
 
+//logs user out when sent back to login page
+sessionStorage.removeItem('userId')
+
 
 
 form.addEventListener('submit', async (event) => {

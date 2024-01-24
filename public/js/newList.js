@@ -6,7 +6,6 @@ const exchangeDate = document.querySelector('#exchangeDate')
 const listName = document.querySelector('#listName')
 const finish = document.querySelector('#finish')
 const items = []
-const thisUser = currentUser
 
 
 
@@ -67,12 +66,12 @@ const finishList = async() => {
                 exchange_date: exchangeDate.value
             })
         }
-        users = await getUsers()
-        currentUser = users[thisUser-1]
-        if(currentUser.owned_lists){
-            updateUser(thisUser, {owned_lists: currentUser.owned_lists + ',' + listId})
+        const users = await getUsers()
+        const thisUser = users[currentUser-1]
+        if(thisUser.owned_lists){
+            updateUser(currentUser, {owned_lists: thisUser.owned_lists + ',' + listId})
         }else{
-            updateUser(thisUser, {owned_lists: listId})
+            updateUser(currentUser, {owned_lists: listId})
         }
         alert(listName.value + ' created')
         window.location.href = 'homePage.html'
