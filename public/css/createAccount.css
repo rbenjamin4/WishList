@@ -1,4 +1,4 @@
-/*Universal Styles*/
+
 :root {
   --pink: #DA258D;
   --green: #8DDA25;
@@ -21,14 +21,14 @@ input {
     font-family: Arial, Helvetica, sans-serif;
   }
   
-  /* Style the submit button */
+
   input[type=submit] {
     background-color: var(--blue);
     color: white;
     border-radius: 8px;
   }
   
-  /* Style the container for inputs */
+
   .container {
     width: 50%;
     margin-top: 50px;
@@ -50,7 +50,7 @@ input {
     text-decoration: underline;
   }
   
-  /* The message box is shown when the user clicks on the password field */
+ 
   #message {
     display:none;
     width: 50%;
@@ -68,7 +68,7 @@ input {
     font-size: 18px;
   }
   
-  /* Add a green text color and a checkmark when the requirements are right */
+  
   .valid {
     color: var(--green)
   }
@@ -80,7 +80,7 @@ input {
     content: "✔";
   }
   
-  /* Add a red text color and an "x" when the requirements are wrong */
+
   .invalid {
     color: var(--pink)
   }
