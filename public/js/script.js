@@ -29,7 +29,6 @@ const postUsers = async(userObj) => {
 // postUsers(newUser)
 
 const postItem = async(itemObj) => {
-    console.log(itemObj)
     const response = await fetch(`/api/items`, {
         method: 'POST',
         body: JSON.stringify(itemObj),
