@@ -15,42 +15,60 @@ const welcomeUser = (userName) => {
     welcome.textContent = `Welcome back, ${userName}`;
 }
 
-const displayOwnedList = (listName, expDate, numItems) => {
+const displayOwnedList = (listId, listName, expDate, expDateFormat, numItems) => {
     const list = document.createElement("div");
     const listP = document.createElement("p");
     const myListsButtonDiv = document.createElement("div");
     const viewEditButton = document.createElement("button");
     const deleteButton = document.createElement("button");
-    list.setAttribute("class", "list");
+    //if list is expired, make expired class, otherwise use list class
+    if(expDateFormat.isBefore(dayjs().startOf('day'))){
+        console.log('expired');
+        list.setAttribute("class", "expired-list");
+    } else {
+        list.setAttribute("class", "list"); 
+    }
     viewEditButton.setAttribute("class", "view-button");
     deleteButton.setAttribute("class", "delete-button");
     listP.textContent = `My ${listName} list (exp. ${expDate}): ${numItems} items`;
-    viewEditButton.textContent = "View/Edit";
+
     deleteButton.textContent = "Delete";
     myLists.appendChild(list);
     list.appendChild(listP);
     list.appendChild(myListsButtonDiv);
     myListsButtonDiv.appendChild(viewEditButton);
     myListsButtonDiv.appendChild(deleteButton);
+
+    //For event listeners, if expired, send to expired function, otherwise send to edit list function
+    if(expDateFormat.isBefore(dayjs().startOf('day'))){
+        viewEditButton.textContent = "View";
+    } else {
+        viewEditButton.textContent = "View/Edit";
+    }
 }
 
-const displaySharedList = (listUserName, listName, expDate, numItems) => {
-    const list = document.createElement("div");
-    const listP = document.createElement("p");
-    const otherListsButtonDiv = document.createElement("div");
-    const viewButton = document.createElement("button");
-    const removeButton = document.createElement("button");
-    list.setAttribute("class", "list");
-    viewButton.setAttribute("class", "view-button");
-    removeButton.setAttribute("class", "remove-button");
-    listP.textContent = `${listUserName}'s ${listName} list (exp. ${expDate}): ${numItems} items`;
-    viewButton.textContent = "View";
-    removeButton.textContent = "Remove";
-    otherLists.appendChild(list);
-    list.appendChild(listP);
-    list.appendChild(otherListsButtonDiv);
-    otherListsButtonDiv.appendChild(viewButton);
-    otherListsButtonDiv.appendChild(removeButton);
+const displaySharedList = (listId, listUserName, listName, expDate, expDateFormat, numItems) => {
+    if(expDateFormat.isBefore(dayjs().startOf('day'))){
+        return;
+    } else {
+        const list = document.createElement("div");
+        const listP = document.createElement("p");
+        const otherListsButtonDiv = document.createElement("div");
+        const viewButton = document.createElement("button");
+        const removeButton = document.createElement("button");
+        list.setAttribute("class", "list");
+        viewButton.setAttribute("class", "view-button");
+        removeButton.setAttribute("class", "remove-button");
+        listP.textContent = `${listUserName}'s ${listName} list (exp. ${expDate}): ${numItems} items`;
+        viewButton.textContent = "View";
+        removeButton.textContent = "Remove";
+        otherLists.appendChild(list);
+        list.appendChild(listP);
+        list.appendChild(otherListsButtonDiv);
+        otherListsButtonDiv.appendChild(viewButton);
+        otherListsButtonDiv.appendChild(removeButton);
+    }
+    
 }
 
 //Returns username based on user id accessed from session storage. Runs welcome function based on username.
@@ -65,12 +83,14 @@ const getUsername = async() => {
 }
 
 //gets the username of the list owner of a shared list for display
+//------------------------------------------------------------NEED TO CHECK THIS CODE WHEN SHARED LISTS ARE POSSIBLE-------------------------//
 const getListOwnerUsernameById = async(listId) => {
     let listOwnerUsername;
     const object = await getUsers();
     for(let i = 0; i < object.length; i++){
         if(object[i].owned_lists){
-            if(object[i].owned_lists.includes(listId)){
+            let ownedListsArray = object[i].owned_lists.split(',');
+            if(ownedListsArray.includes(listId)){
                 listOwnerUsername = object[i].username;
             }
         }
@@ -84,16 +104,18 @@ const getListOwnerUsernameById = async(listId) => {
 const makeOwnedListFromItems = async(listId) => {
     let listName;
     let expDate;
+    let expDateFormat;
     let numItems = 0;
     let object = await getItems();
     for(let i = 0; i < object.length; i++){
         if(object[i].list_id == listId){
             listName = object[i].list_name;
             expDate = dayjs(object[i].exchange_date).format("MMMM D, YYYY");
+            expDateFormat = dayjs(object[i].exchange_date);
             numItems++;
         }
     }
-    displayOwnedList(listName, expDate, numItems);
+    displayOwnedList(listId, listName, expDate, expDateFormat, numItems);
 }
 
 //takes shared list id, sends 3 required fields to display shared list function
@@ -101,16 +123,18 @@ const makeSharedListFromItems = async(listId) => {
     let ownerUsername = await getListOwnerUsernameById(listId);
     let listName;
     let expDate;
+    let expDateFormat;
     let numItems = 0;
     let object = await getItems();
     for(let i = 0; i < object.length; i++){
         if(object[i].list_id == listId){
             listName = object[i].list_name;
             expDate = dayjs(object[i].exchange_date).format("MMMM D, YYYY");
+            expDateFormat = dayjs(object[i].exchange_date);
             numItems++;
         }
     }
-    displaySharedList(ownerUsername, listName, expDate, numItems);
+    displaySharedList(listId, ownerUsername, listName, expDate, expDateFormat, numItems);
 }
 
 //Gets owned and shared lists for user by id. Returns array where index 0 is owned lists and index 1 is shared lists (false if no lists)
