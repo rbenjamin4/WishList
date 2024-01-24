@@ -5,15 +5,38 @@ const myLists = document.querySelector("#my-lists");
 const otherLists = document.querySelector("#other-lists");
 const newListButton = document.querySelector("#new-list-button");
 
-const sendToNewList = () => {
-    window.location.href = "newList.html";
-}
-
-newListButton.addEventListener("click", sendToNewList);
-
 const welcomeUser = (userName) => {
     welcome.textContent = `Welcome back, ${userName}`;
 }
+
+const sendToNewList = () => {
+    window.location.href = "newList.html";
+}
+newListButton.addEventListener("click", sendToNewList);
+
+const sendToViewSharedList = (listId) => {
+    sessionStorage.setItem('listId', listId);
+    window.location.href = "viewSharedList.html";
+}
+
+const sendToViewExpiredList = (listId) => {
+    sessionStorage.setItem('listId', listId);
+    window.location.href = "viewExpiredList.html";
+}
+
+const sendToEditList = () => {
+    sessionStorage.setItem('listId', listId);
+    window.location.href = "editList.html";
+}
+
+const deleteOwnedList = () => {
+    //code to delete an owned list, and remove it from owner's owned lists and other's shared lists as needed, and then re-display lists
+}
+
+const removeSharedList = () => {
+    //code to remove a shared list id from shared lists and then re-display lists
+}
+
 
 const displayOwnedList = (listId, listName, expDate, expDateFormat, numItems) => {
     const list = document.createElement("div");
@@ -42,12 +65,19 @@ const displayOwnedList = (listId, listName, expDate, expDateFormat, numItems) =>
     //For event listeners, if expired, send to expired function, otherwise send to edit list function
     if(expDateFormat.isBefore(dayjs().startOf('day'))){
         viewEditButton.textContent = "View";
+        viewEditButton.addEventListener("click", function(){
+            sendToViewExpiredList(listId);
+        });
     } else {
         viewEditButton.textContent = "View/Edit";
+        viewEditButton.addEventListener("click", function(){
+            sendToEditList(listId);
+        })
     }
 }
 
 const displaySharedList = (listId, listUserName, listName, expDate, expDateFormat, numItems) => {
+    //Code to not display expired shared lists
     if(expDateFormat.isBefore(dayjs().startOf('day'))){
         return;
     } else {
@@ -67,8 +97,11 @@ const displaySharedList = (listId, listUserName, listName, expDate, expDateForma
         list.appendChild(otherListsButtonDiv);
         otherListsButtonDiv.appendChild(viewButton);
         otherListsButtonDiv.appendChild(removeButton);
+
+        viewButton.addEventListener("click", function(){
+            sendToViewSharedList(listId);
+        })
     }
-    
 }
 
 //Returns username based on user id accessed from session storage. Runs welcome function based on username.
