@@ -7,9 +7,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="./css/createAccount.css">
-    <script src="./js/script.js" defer></script>
     <script src="./js/session.js" defer></script>
+    <script src="./js/script.js" defer></script>
+    <script src="./js/editList.js" defer></script>
     <title>Buy Me Things!</title>
 </head>
 <body>
@@ -19,19 +19,22 @@
         <nav>
             <ul>
                 <li><a href="homePage.html">HOME</a></li>
-                <li><a href="about.html">ABOUT</a></li>
                 <li><a href="index.html">LOGOUT</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <div class="container">
-            <h2>ABOUT</h2>
-            <br>
-        
-            <p>The Buy Me Things smart wish list system is a web application that helps users create lists for gift exchanges. Each user account can create multiple lists for different events (birthdays, holidays, etc.) that can be shared with other people. These other users (who also need to create accounts) can buy items off the list that's shared with them and mark individual items as bought. Lists include an event date, which will act as the expiration date for being able to buy items. Only after the event date can the list owner see what has been purchased off of their wish list.</p>
-          </div> 
-
+        <h3 id="listName"></h3>
+        <label for="sharedWith">Enter your friend's username to share list</label>
+        <input type="text" id="otherUsername">
+        <button id="share">Share</button>
+        <div id="list">
+            <label for="itemName">Item Name</label>
+            <input type="text" id="itemName">
+            <label for="itemUrl">Item URL</label>
+            <input type="text" id="itemUrl">
+            <button id="add">Add new Item to list</button>
+        </div>
     </main>
     <footer>
         
