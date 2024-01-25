@@ -1,9 +1,3 @@
-
-
-
-
-
-
 const postUsers = async(userObj) => {
 
     const response = await fetch(`/api/users`, {
@@ -13,20 +7,7 @@ const postUsers = async(userObj) => {
             'Content-Type': 'application/json',
         }
     })
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
 
 const postItem = async(itemObj) => {
     const response = await fetch(`/api/items`, {
@@ -37,32 +18,6 @@ const postItem = async(itemObj) => {
         }
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const getUsers = async() => {
     const response = await fetch(`/api/users`)
@@ -76,15 +31,6 @@ const getItems = async() => {
     const data = await response.json()
     return data
 }
-
-
-
-
-
-
-
-
-
 
 const deleteUsers = async(id) => {
    const response = await fetch(`/api/users/${id}`, {
@@ -105,19 +51,6 @@ const deleteItems = async(id) => {
         }
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const updateUser = async(id, newUserObj) => {
    const response = await fetch(`/api/users/${id}`, {
