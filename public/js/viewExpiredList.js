@@ -69,6 +69,7 @@ const displayList = async(listId) => {
             let itemId = object[i].id;
             let itemName = object[i].name;
             let itemUrl = object[i].url;
+            const itemComment = object[i].comment
 
             let itemDiv = document.createElement("div");
             itemDiv.setAttribute("class", "item-div");
@@ -79,10 +80,14 @@ const displayList = async(listId) => {
             let boughtByContentsDiv = document.createElement("div");
             let boughtStatus = await findBoughtStatus(itemId);
             let boughtStatusDiv = document.createElement("p");
+            const itemCommentP = document.createElement('p')
+            itemCommentP.textContent = itemComment
+            itemCommentP.style.width = '25%'
             boughtStatusDiv.textContent = boughtStatus;
             boughtByContentsDiv.appendChild(boughtStatusDiv);
             itemDiv.appendChild(itemNameP);
             itemDiv.appendChild(itemUrlP);
+            itemDiv.appendChild(itemCommentP)
             itemDiv.appendChild(boughtByContentsDiv);
             list.appendChild(itemDiv);
         }
