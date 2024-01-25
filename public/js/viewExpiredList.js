@@ -1,4 +1,8 @@
-const exampleListId = 1;
+if(!sessionStorage.getItem('listId')){
+    window.location.href = 'homePage.html'
+}else{
+    listId = sessionStorage.getItem('listId')
+}
 
 const list = document.querySelector("#list");
 const welcome = document.querySelector("#welcome");
@@ -85,7 +89,5 @@ const displayList = async(listId) => {
     }
 }
 
-
-
-displayList(exampleListId);
+displayList(listId);
 

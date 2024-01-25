@@ -115,12 +115,6 @@ const getUsername = async() => {
     }
 }
 
-<<<<<<< HEAD
-
-=======
-//gets the username of the list owner of a shared list for display
-//------------------------------------------------------------NEED TO CHECK THIS CODE WHEN SHARED LISTS ARE POSSIBLE-------------------------//
->>>>>>> 1656d6686223617a74d188fcb663c5f4fdbff766
 const getListOwnerUsernameById = async(listId) => {
     let listOwnerUsername;
     const object = await getUsers();
@@ -132,7 +126,6 @@ const getListOwnerUsernameById = async(listId) => {
             }
         }
     }
-    console.log(listOwnerUsername)
     return listOwnerUsername;
 }
 
