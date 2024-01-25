@@ -40,50 +40,6 @@ const getUsername = async() => {
 }
 getUsername();
 
-const markNotBought = async(itemIndex) => {
-    updateItem(itemIndex, {bought_by: null});
-    displayList(listId);
-}
-
-const markAsBought = async(itemIndex) => {
-    updateItem(itemIndex, {bought_by: currentUser});
-    displayList(listId);
-}
-
-const handleBoughtByStatus = async(itemIndex) => {
-    let item;
-    const object = await getItems();
-    for(let i = 0; i < object.length; i++){
-        if(object[i].id == itemIndex){
-            item = object[i];
-        }
-    }
-    let boughtByContents;
-        if(item.bought_by == currentUser){
-            console.log("bought by this user");
-            let notBoughtButton = document.createElement("button");
-            notBoughtButton.textContent = "Mark not bought";
-            notBoughtButton.addEventListener("click", function(){
-                markNotBought(itemIndex);
-            });
-            boughtByContents = notBoughtButton;
-        } else if(item.bought_by === null){
-            console.log("can be bought");
-            let markBoughtButton = document.createElement("button");
-            markBoughtButton.textContent = "Mark as bought";
-            markBoughtButton.addEventListener("click", function(){
-                markAsBought(itemIndex);
-            });
-            boughtByContents = markBoughtButton;
-        } else {
-            console.log("bought by another user");
-            let alreadyBought = document.createElement("p");
-            alreadyBought.textContent = "Already bought";
-            boughtByContents = alreadyBought;
-        }
-    return boughtByContents;
-}
-
 const displayList = async(listId) => {
     const object = await getItems();
     let listOwner = await getListOwnerUsernameById(listId);
@@ -101,7 +57,6 @@ const displayList = async(listId) => {
         list.removeChild(list.lastChild);
     }
 
-    //populate item information: name, url, bought_by
     for(let i = 0; i < object.length; i++){
         if(object[i].list_id == listId){
             let itemId = object[i].id;
@@ -115,12 +70,30 @@ const displayList = async(listId) => {
             let itemUrlP = document.createElement("p");
             itemUrlP.textContent = itemUrl;
             let boughtByContentsDiv = document.createElement("div");
-            let boughtStatus = await handleBoughtByStatus(itemId);
-            boughtByContentsDiv.appendChild(boughtStatus);
+            let boughtButton = document.createElement("button");
+            if(object[i].bought_by == currentUser){
+                boughtButton.textContent = "Mark not bought";
+            } else if(object[i].bought_by){
+                boughtButton.textContent = "Already bought";
+            } else {
+                boughtButton.textContent = "Mark as bought";
+            }
+            boughtByContentsDiv.appendChild(boughtButton);
             itemDiv.appendChild(itemNameP);
             itemDiv.appendChild(itemUrlP);
             itemDiv.appendChild(boughtByContentsDiv);
             list.appendChild(itemDiv);
+            boughtButton.addEventListener("click", async function(){
+                if(boughtButton.textContent === "Already bought"){
+                    return;
+                } else if(boughtButton.textContent === "Mark not bought"){
+                    boughtButton.textContent = "Mark as bought";
+                    await updateItem(object[i].id, {bought_by: null})
+                } else {
+                    boughtButton.textContent = "Mark not bought";
+                    await updateItem(object[i].id, {bought_by: currentUser});
+                }
+            })
         }
     }
 }
