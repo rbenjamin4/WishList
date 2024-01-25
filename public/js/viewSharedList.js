@@ -1,4 +1,8 @@
-const exampleListId = 1;
+if(!sessionStorage.getItem('listId')){
+    window.location.href = 'homePage.html'
+}else{
+    listId = sessionStorage.getItem('listId')
+}
 
 const list = document.querySelector("#list");
 const welcome = document.querySelector("#welcome");
@@ -9,7 +13,8 @@ const getListOwnerUsernameById = async(listId) => {
     const object = await getUsers();
     for(let i = 0; i < object.length; i++){
         if(object[i].owned_lists){
-            if(object[i].owned_lists.split(",").includes(listId)){ //////////////////////////////issue
+            let ownedListsArray = object[i].owned_lists.split(',');
+            if(ownedListsArray.includes(listId)){
                 listOwnerUsername = object[i].username;
             }
         }
@@ -17,7 +22,7 @@ const getListOwnerUsernameById = async(listId) => {
     return listOwnerUsername;
 }
 
-const listOwnerUsername = getListOwnerUsernameById(exampleListId);
+const listOwnerUsername = getListOwnerUsernameById(listId);
 
 const welcomeUser = (userName, listOwnerUsername) => {
     welcome.textContent = `Hello ${userName}! ${listOwnerUsername} shared their list with you:`;
@@ -28,7 +33,7 @@ const getUsername = async() => {
     for(i in users){
         if(users[i].id == currentUser){
             const userName =  users[i].username
-            const listOwnerUsername = await getListOwnerUsernameById(exampleListId);
+            const listOwnerUsername = await getListOwnerUsernameById(listId);
             welcomeUser(userName, listOwnerUsername);
         }
     }
@@ -37,12 +42,12 @@ getUsername();
 
 const markNotBought = async(itemIndex) => {
     updateItem(itemIndex, {bought_by: null});
-    displayList(exampleListId);
+    displayList(listId);
 }
 
 const markAsBought = async(itemIndex) => {
     updateItem(itemIndex, {bought_by: currentUser});
-    displayList(exampleListId);
+    displayList(listId);
 }
 
 const handleBoughtByStatus = async(itemIndex) => {
@@ -122,5 +127,5 @@ const displayList = async(listId) => {
 
 
 
-displayList(exampleListId);
+displayList(listId);
 
