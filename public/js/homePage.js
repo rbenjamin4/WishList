@@ -1,5 +1,3 @@
-
-
 const welcome = document.querySelector("#welcome");
 const myLists = document.querySelector("#my-lists");
 const otherLists = document.querySelector("#other-lists");
@@ -29,12 +27,53 @@ const sendToEditList = (listId) => {
     window.location.href = "editList.html";
 }
 
-const deleteOwnedList = () => {
-    //code to delete an owned list, and remove it from owner's owned lists and other's shared lists as needed, and then re-display lists
+const deleteOwnedList = async(listId) => {
+    const users = await getUsers();
+    const items = await getItems();
+    for(i in users){
+        if(users[i].id == currentUser){
+            const ownedListArray = users[i].owned_lists.split(",");
+            for(j in ownedListArray){
+                if(ownedListArray[j] == listId){
+                    ownedListArray.splice(j, 1);
+                    await updateUser(currentUser, {owned_lists: ownedListArray.join(",")})
+                }
+            }
+        }
+    }
+    for(i in users){
+        if(users[i].shared_lists){
+            const sharedListArray = users[i].shared_lists.split(",");
+            for(j in sharedListArray){
+                if(sharedListArray[j] == listId){
+                    sharedListArray.splice(j, 1);
+                    await updateUser(users[i].id, {shared_lists: sharedListArray.join(",")})
+                }
+            }
+        }
+
+    }
+    for(i in items){
+        if(items[i].list_id == listId){
+            await deleteItems(items[i].id);
+        } 
+    }
 }
 
-const removeSharedList = () => {
-    //code to remove a shared list id from shared lists and then re-display lists
+const removeSharedList = async(listId) => {
+    const users = await getUsers();
+    for(i in users){
+        if(users[i].id == currentUser){
+            const sharedListArray = users[i].shared_lists.split(",");
+            for(j in sharedListArray){
+                if(sharedListArray[j] == listId){
+                    sharedListArray.splice(j, 1);
+                    await updateUser(currentUser, {shared_lists: sharedListArray.join(",")})
+                }
+            }
+        }
+    }
+
 }
 
 
@@ -61,6 +100,11 @@ const displayOwnedList = (listId, listName, expDate, expDateFormat, numItems) =>
     list.appendChild(myListsButtonDiv);
     myListsButtonDiv.appendChild(viewEditButton);
     myListsButtonDiv.appendChild(deleteButton);
+
+    deleteButton.addEventListener("click", function(){
+        deleteOwnedList(listId);
+        myLists.removeChild(list);
+    });
 
     //For event listeners, if expired, send to expired function, otherwise send to edit list function
     if(expDateFormat.isBefore(dayjs().startOf('day'))){
@@ -97,7 +141,10 @@ const displaySharedList = (listId, listUserName, listName, expDate, expDateForma
         list.appendChild(otherListsButtonDiv);
         otherListsButtonDiv.appendChild(viewButton);
         otherListsButtonDiv.appendChild(removeButton);
-
+        removeButton.addEventListener("click", function(){
+            removeSharedList(listId);
+            otherLists.removeChild(list);
+        })
         viewButton.addEventListener("click", function(){
             sendToViewSharedList(listId);
         })
