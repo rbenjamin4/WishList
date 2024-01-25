@@ -115,7 +115,13 @@ const addItem = async() => {
         div.appendChild(commentButton)
         div.style.display = 'flex'
         list.appendChild(div)
-        const id = items[items.length-1].id
+        let id = 0
+        for(i in items){
+            if(items[i].id > id){
+                id = items[i].id
+            }
+        }
+        id += 1
 
         const deleteItem = async() => {
             list.removeChild(div)

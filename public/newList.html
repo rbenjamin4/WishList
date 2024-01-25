@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <link href="./css/viewNewEditLists.css" rel="stylesheet" type="text/css">
     <script src="./js/session.js" defer></script>
     <script src="./js/script.js" defer></script>
     <script src="./js/newList.js" defer></script>
@@ -25,8 +26,10 @@
         </nav>
     </header>
     <main>
-        <label for="listName">List Name</label>
-        <input type="text" id="listName">
+        <div id="name">
+            <label for="listName">List Name</label>
+            <input type="text" id="listName">
+        </div>
         <div id="list">
             <label for="itemName">Item Name</label>
             <input type="text" id="itemName">
@@ -34,9 +37,11 @@
             <input type="text" id="itemUrl">
             <button id="add">Add new Item to list</button>
         </div>
-        <label for="exchangeDate">Gift Exchange Date:</label>
-        <input type="date" id="exchangeDate">
-        <button id="finish">Create List</button>
+        <div id="finishList">
+            <label for="exchangeDate">Gift Exchange Date:</label>
+            <input type="date" id="exchangeDate">
+            <button id="finish">Create List</button>
+        </div>
     </main>
     <footer>
         
