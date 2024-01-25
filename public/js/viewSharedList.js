@@ -62,6 +62,7 @@ const displayList = async(listId) => {
             let itemId = object[i].id;
             let itemName = object[i].name;
             let itemUrl = object[i].url;
+            const itemComment = object[i].comment
 
             let itemDiv = document.createElement("div");
             itemDiv.setAttribute("class", "item-div");
@@ -71,6 +72,9 @@ const displayList = async(listId) => {
             itemUrlP.textContent = itemUrl;
             let boughtByContentsDiv = document.createElement("div");
             let boughtButton = document.createElement("button");
+            const itemCommentP = document.createElement('p')
+            itemCommentP.textContent = itemComment
+            itemCommentP.style.width = '25%'
             if(object[i].bought_by == currentUser){
                 boughtButton.textContent = "Mark not bought";
             } else if(object[i].bought_by){
@@ -81,6 +85,7 @@ const displayList = async(listId) => {
             boughtByContentsDiv.appendChild(boughtButton);
             itemDiv.appendChild(itemNameP);
             itemDiv.appendChild(itemUrlP);
+            itemDiv.appendChild(itemCommentP)
             itemDiv.appendChild(boughtByContentsDiv);
             list.appendChild(itemDiv);
             boughtButton.addEventListener("click", async function(){
