@@ -26,8 +26,16 @@ const initialize = async() => {
             const id = items[i].id
             const button = document.createElement('button')
             button.textContent = 'Delete'
+            const textArea = document.createElement('textArea')
+            if(items[i].comment){
+                textArea.value = items[i].comment
+            }
+            const commentButton = document.createElement('button')
+            commentButton.textContent = 'Add/Edit Comment'
             div.appendChild(a)
             div.appendChild(button)
+            div.appendChild(textArea)
+            div.appendChild(commentButton)
             div.style.display = 'flex'
             list.appendChild(div)
 
@@ -36,7 +44,12 @@ const initialize = async() => {
                 await deleteItems(id)
             }
 
+            const addComment = async() => {
+                await updateItem(id, {comment: textArea.value})
+            }
+
             button.addEventListener('click', deleteItem)
+            commentButton.addEventListener('click', addComment)
         }
     }
 }
@@ -93,18 +106,28 @@ const addItem = async() => {
         a.href = itemUrl.value
         const button = document.createElement('button')
         button.textContent = 'Delete'
+        const textArea = document.createElement('textarea')
+        const commentButton = document.createElement('button')
+        commentButton.textContent = 'Add/Edit Comment'
         div.appendChild(a)
         div.appendChild(button)
+        div.appendChild(textArea)
+        div.appendChild(commentButton)
         div.style.display = 'flex'
         list.appendChild(div)
-        const id = items[items.length-1].id + 1
+        const id = items[items.length-1].id
 
         const deleteItem = async() => {
             list.removeChild(div)
             await deleteItems(id)
         }
 
+        const addComment = async() => {
+            await updateItem(id, {comment: textArea.value})
+        }
+
         button.addEventListener('click', deleteItem)
+        commentButton.addEventListener('click', addComment)
         itemName.value = ''
         itemUrl.value = ''
     }
