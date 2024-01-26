@@ -61,16 +61,21 @@ const share = async() => {
     let isShared = false
     for(i in users){
         if(users[i].username === otherUsername.value){
-            if(users[i].shared_lists){
-                const sharedLists = users[i].shared_lists.split(',')
-                console.log(sharedLists)
-                if(!sharedLists.includes(listId)){
-                    await updateUser(users[i].id, {shared_lists: users[i].shared_lists + ',' + listId})
+            if(users[i].id != currentUser){
+                if(users[i].shared_lists){
+                    const sharedLists = users[i].shared_lists.split(',')
+                    console.log(sharedLists)
+                    if(!sharedLists.includes(listId)){
+                        await updateUser(users[i].id, {shared_lists: users[i].shared_lists + ',' + listId})
+                    }
+                }else{
+                    await updateUser(users[i].id, {shared_lists: listId})
                 }
+                isShared = true
             }else{
-                await updateUser(users[i].id, {shared_lists: listId})
+                alert('You cannot share a list with yourself.')
+                return
             }
-            isShared = true
         }
     }
     if(isShared){
