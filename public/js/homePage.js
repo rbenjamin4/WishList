@@ -84,7 +84,7 @@ const displayOwnedList = (listId, listName, expDate, expDateFormat, numItems) =>
     const viewEditButton = document.createElement("button");
     const deleteButton = document.createElement("button");
     //if list is expired, make expired class, otherwise use list class
-    if(expDateFormat.isBefore(dayjs().startOf('day'))){
+    if(expDateFormat.isBefore(dayjs().add(1, 'day').startOf('day'))){
         console.log('expired');
         list.setAttribute("class", "expired-list");
     } else {
@@ -107,7 +107,7 @@ const displayOwnedList = (listId, listName, expDate, expDateFormat, numItems) =>
     });
 
     //For event listeners, if expired, send to expired function, otherwise send to edit list function
-    if(expDateFormat.isBefore(dayjs().startOf('day'))){
+    if(expDateFormat.isBefore(dayjs().add(1, 'day').startOf('day'))){
         viewEditButton.textContent = "View";
         viewEditButton.addEventListener("click", function(){
             sendToViewExpiredList(listId);
@@ -122,7 +122,7 @@ const displayOwnedList = (listId, listName, expDate, expDateFormat, numItems) =>
 
 const displaySharedList = (listId, listUserName, listName, expDate, expDateFormat, numItems) => {
     //Code to not display expired shared lists
-    if(expDateFormat.isBefore(dayjs().startOf('day'))){
+    if(expDateFormat.isBefore(dayjs().add(1, 'day').startOf('day'))){
         return;
     } else {
         const list = document.createElement("div");
@@ -187,8 +187,8 @@ const makeOwnedListFromItems = async(listId) => {
     for(let i = 0; i < object.length; i++){
         if(object[i].list_id == listId){
             listName = object[i].list_name;
-            expDate = dayjs(object[i].exchange_date).format("MMMM D, YYYY");
-            expDateFormat = dayjs(object[i].exchange_date);
+            expDate = dayjs(object[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
+            expDateFormat = dayjs(object[i].exchange_date).add(1, 'day');
             numItems++;
         }
     }
@@ -206,8 +206,8 @@ const makeSharedListFromItems = async(listId) => {
     for(let i = 0; i < object.length; i++){
         if(object[i].list_id == listId){
             listName = object[i].list_name;
-            expDate = dayjs(object[i].exchange_date).format("MMMM D, YYYY");
-            expDateFormat = dayjs(object[i].exchange_date);
+            expDate = dayjs(object[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
+            expDateFormat = dayjs(object[i].exchange_date).add(1, 'day');
             numItems++;
         }
     }

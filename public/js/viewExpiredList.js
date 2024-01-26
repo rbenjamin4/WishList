@@ -54,7 +54,7 @@ const displayList = async(listId) => {
     for(let i = 0; i < object.length; i++){
         if(object[i].list_id == listId){
             listName = object[i].list_name;
-            exchangeDate = dayjs(object[i].exchange_date).format("MMMM D, YYYY");
+            exchangeDate = dayjs(object[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
         }
     }
     listTitle.textContent = `${userName}'s ${listName} list (expired ${exchangeDate})`;
