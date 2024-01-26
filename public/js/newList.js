@@ -67,7 +67,12 @@ const finishList = async() => {
             })
         }
         const users = await getUsers()
-        const thisUser = users[currentUser-1]
+        let thisUser
+        for(i in users){
+            if(users[i].id = currentUser){
+                thisUser = users[i]
+            }
+        }
         if(thisUser.owned_lists){
             updateUser(currentUser, {owned_lists: thisUser.owned_lists + ',' + listId})
         }else{

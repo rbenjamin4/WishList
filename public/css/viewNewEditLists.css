@@ -1,0 +1,65 @@
+:root {
+    --pink: #DA258D;
+    --green: #8DDA25;
+    --blue: #258DDA;
+    --black: #000000;
+    --white: #ffffff;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+#name, #finishList{
+    width: 60%;
+    align-self: center;
+    text-align: center;
+}
+
+#listName{
+    width: 90%
+}
+
+#list {
+    background-color: lightgrey;
+    width: 60%;
+    margin: 10px;
+    border: solid black 5px;
+    align-self: center;
+    text-align: center;
+}
+
+#list div{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--green);
+    border: 5px black solid;
+    padding: 5px;
+    margin: 5px;
+}
+
+#list div a{
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    color: darkblue;
+}
+
+#list div button{
+    align-self: center;
+}
+
+button {
+    color: var(--black);
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    padding: 2px;
+    margin-left: 3px;
+}
+
+h3 {
+    font-size: 3rem;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
