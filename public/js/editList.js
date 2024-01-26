@@ -72,6 +72,9 @@ const share = async() => {
                     await updateUser(users[i].id, {shared_lists: listId})
                 }
                 isShared = true
+            }else{
+                alert('You cannot share a list with yourself.')
+                return
             }
         }
     }
