@@ -50,22 +50,11 @@ add.addEventListener('click', addItem)
 
 const finishList = async() => {
     if(items && exchangeDate && listName){
-        const itemList = await getItems()
-        let listId = 1
-        for(i in itemList){
-            if(itemList[i].list_id >= listId){
-                listId = itemList[i].list_id + 1
-            }
-        }
-        for(i in items){
-            postItem({
-                list_id: listId, 
-                list_name: listName.value, 
-                name: items[i].name, 
-                url: items[i].url, 
-                exchange_date: exchangeDate.value
-            })
-        }
+        await postList({
+            list_owner: currentUser,
+            name : listName.value,
+            exchange_date: exchangeDate.value
+        })
         const users = await getUsers()
         let thisUser
         for(i in users){
@@ -73,10 +62,25 @@ const finishList = async() => {
                 thisUser = users[i]
             }
         }
-        if(thisUser.owned_lists){
-            updateUser(currentUser, {owned_lists: thisUser.owned_lists + ',' + listId})
-        }else{
-            updateUser(currentUser, {owned_lists: listId})
+        let listId
+        const lists = await getLists()
+        for(i in lists){
+            if(lists[i].list_owner == currentUser && !thisUser.owned_lists){
+                listId = lists[i].id
+                await updateUser(currentUser, {owned_lists: listId})
+            }else if(lists[i].list_owner == thisUser.id && !thisUser.owned_lists.split(',').includes(lists[i].id)){
+                listId = lists[i].id
+                await updateUser(currentUser, {owned_lists: thisUser.owned_lists + ',' + listId})
+            }
+        }
+        for(i in items){
+            await postItem({
+                list_id: listId, 
+                list_name: listName.value, 
+                name: items[i].name, 
+                url: items[i].url, 
+                exchange_date: exchangeDate.value
+            })
         }
         alert(listName.value + ' created')
         window.location.href = 'homePage.html'

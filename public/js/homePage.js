@@ -30,6 +30,7 @@ const sendToEditList = (listId) => {
 const deleteOwnedList = async(listId) => {
     const users = await getUsers();
     const items = await getItems();
+    const lists = await getLists();
     for(i in users){
         if(users[i].id == currentUser){
             const ownedListArray = users[i].owned_lists.split(",");
@@ -57,6 +58,11 @@ const deleteOwnedList = async(listId) => {
         if(items[i].list_id == listId){
             await deleteItems(items[i].id);
         } 
+    }
+    for(i in lists){
+        if(lists[i].id = listId){
+            await deleteLists(listId)
+        }
     }
 }
 
