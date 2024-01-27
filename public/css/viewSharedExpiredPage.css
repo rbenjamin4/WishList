@@ -10,7 +10,7 @@
 /*Welcome Message text*/
 h3 {
     font-size: 3rem;
-    font-family: 'Times New Roman', Times, serif;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
 }
 
@@ -26,13 +26,17 @@ h3 {
     margin: 10px;
     border: solid black 5px;
     text-align: center;
+    background-color: var(--pink);
+    box-shadow: 5px 5px var(--black);
 }
 
 #list-title {
     font-size: 2rem;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
     background-color: var(--pink);
     border-bottom: 5px var(--black) solid;
+    background-color: var(--green);
+    color: var(--black)
 }
 
 button {
@@ -46,7 +50,7 @@ button {
 .item-div {
     display: flex;
     justify-content: space-between;
-    background-color: var(--green);
+    background-color: var(--white);
     border: 5px black solid;
     padding: 5px;
     margin: 5px;
