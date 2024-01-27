@@ -220,7 +220,7 @@ const extractListsByUserId = async (userId) => {
             if(object[i].shared_lists){
                 let sharedListsArray = object[i].shared_lists.split(',');
                 for(let i = 0; i < sharedListsArray.length; i++){
-                    displaySharedList(sharedListsArrayListsArray[i]);
+                    displaySharedList(sharedListsArray[i]);
                 }
             }
         }
