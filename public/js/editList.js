@@ -15,10 +15,15 @@ const itemUrl = document.querySelector('#itemUrl')
 const add = document.querySelector('#add')
 
 const initialize = async() => {
+    const lists = await getLists()
+    for(i in lists){
+        if(lists[i].id == listId){
+            listName.textContent = lists[i].name
+        }
+    }
     const items = await getItems()
     for(i in items){
         if(items[i].list_id == listId){
-            listName.textContent = items[i].list_name
             const div = document.createElement('div')
             const a = document.createElement('a')
             a.textContent = items[i].name

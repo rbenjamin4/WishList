@@ -49,12 +49,13 @@ const findBoughtStatus = async(itemId) => {
 const displayList = async(listId) => {
     const object = await getItems();
     let userName = await getUsername();
+    const lists = await getLists()
     let listName;
     let exchangeDate;
-    for(let i = 0; i < object.length; i++){
-        if(object[i].list_id == listId){
-            listName = object[i].list_name;
-            exchangeDate = dayjs(object[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
+    for(let i = 0; i < lists.length; i++){
+        if(lists[i].id == listId){
+            listName = lists[i].name;
+            exchangeDate = dayjs(lists[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
         }
     }
     listTitle.textContent = `${userName}'s ${listName} list (expired ${exchangeDate})`;

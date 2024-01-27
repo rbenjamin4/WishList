@@ -214,6 +214,7 @@ const makeSharedListFromItems = async(listId) => {
     let expDateFormat;
     let numItems = 0;
     let object = await getLists();
+    const items = await getItems()
     for(let i = 0; i < object.length; i++){
         if(object[i].id == listId){
             listName = object[i].name;
