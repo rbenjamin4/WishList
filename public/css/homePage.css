@@ -20,12 +20,13 @@ h3 {
 }
 
 .list-of-lists {
-    background-color: var(--white);
+    background-color: var(--pink);
     height: 600px;
     width: 600px;
     margin: 10px;
     border: solid black 5px;
     text-align: center;
+    box-shadow: 5px 5px var(--black);
 }
 
 #my-lists {
