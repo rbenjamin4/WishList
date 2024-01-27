@@ -68,7 +68,7 @@ const finishList = async() => {
             if(lists[i].list_owner == currentUser && !thisUser.owned_lists){
                 listId = lists[i].id
                 await updateUser(currentUser, {owned_lists: listId})
-            }else if(lists[i].list_owner == thisUser.id && !owned_lists.split(',').includes(lists[i].id)){
+            }else if(lists[i].list_owner == thisUser.id && !thisUser.owned_lists.split(',').includes(lists[i].id)){
                 listId = lists[i].id
                 await updateUser(currentUser, {owned_lists: thisUser.owned_lists + ',' + listId})
             }
