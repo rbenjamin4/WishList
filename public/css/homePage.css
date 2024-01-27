@@ -10,7 +10,7 @@
 
 h3 {
     font-size: 3rem;
-    font-family: 'Times New Roman', Times, serif;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
 }
 
@@ -21,7 +21,7 @@ h3 {
 
 .list-of-lists {
     background-color: var(--pink);
-    height: 600px;
+    height: 450px;
     width: 600px;
     margin: 10px;
     border: solid black 5px;
