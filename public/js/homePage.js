@@ -113,12 +113,17 @@ const displayOwnedList = async(listId) => {
     let expDateFormat;
     let numItems = 0;
     let object = await getItems();
-    for(let i = 0; i < object.length; i++){
+    for(i in object){
         if(object[i].list_id == listId){
-            listName = object[i].list_name;
-            expDate = dayjs(object[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
-            expDateFormat = dayjs(object[i].exchange_date).add(1, 'day');
-            numItems++;
+            numItems++
+        }
+    }
+    const lists = await getLists()
+    for(let i = 0; i < lists.length; i++){
+        if(lists[i].id == listId){
+            listName = lists[i].name;
+            expDate = dayjs(lists[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
+            expDateFormat = dayjs(lists[i].exchange_date).add(1, 'day');
         }
     }
     const list = document.createElement("div");
@@ -169,12 +174,17 @@ const displaySharedList = async(listId) => {
     let expDateFormat;
     let numItems = 0;
     let object = await getItems();
-    for(let i = 0; i < object.length; i++){
+    for(i in object){
         if(object[i].list_id == listId){
-            listName = object[i].list_name;
-            expDate = dayjs(object[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
-            expDateFormat = dayjs(object[i].exchange_date).add(1, 'day');
-            numItems++;
+            numItems++
+        }
+    }
+    const lists = await getLists()
+    for(let i = 0; i < lists.length; i++){
+        if(lists[i].id == listId){
+            listName = lists[i].name;
+            expDate = dayjs(lists[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
+            expDateFormat = dayjs(lists[i].exchange_date).add(1, 'day');
         }
     }
     //Code to not display expired shared lists
@@ -229,5 +239,3 @@ const extractListsByUserId = async (userId) => {
 
 getUsername();
 extractListsByUserId(currentUser);
-
-

@@ -42,13 +42,14 @@ getUsername();
 
 const displayList = async(listId) => {
     const object = await getItems();
+    const lists = await getLists()
     let listOwner = await getListOwnerUsernameById(listId);
     let listName;
     let exchangeDate;
-    for(let i = 0; i < object.length; i++){
-        if(object[i].list_id == listId){
-            listName = object[i].list_name;
-            exchangeDate = dayjs(object[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
+    for(let i = 0; i < lists.length; i++){
+        if(lists[i].id == listId){
+            listName = lists[i].name;
+            exchangeDate = dayjs(lists[i].exchange_date).add(1, 'day').format("MMMM D, YYYY");
         }
     }
     listTitle.textContent = `${listOwner}'s ${listName} list (expires ${exchangeDate})`;
