@@ -28,7 +28,7 @@ h1 {
     color: var(--green);
     font-size: 5rem;
     line-height: 100%;
-    padding: 10px;
+    padding-top: 10px;
     text-shadow: 5px 5px black;
 }
 
@@ -37,6 +37,7 @@ h2 {
     font-size: 1.5rem;
     color: var(--blue);
     text-shadow: 3px 3px black;
+    margin-bottom: 5px;
 }
 
 ul {
