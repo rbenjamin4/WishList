@@ -15,7 +15,6 @@ form.addEventListener('submit', async (event) => {
     let flag = false
 
     const userData = await getUsers()
-    console.log(userData)
     for (i in userData) {
         if (userData[i].username == username.value && userData[i].password == password.value) {
             sessionStorage.setItem('userId', userData[i].id)
