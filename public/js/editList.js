@@ -94,11 +94,11 @@ shareButton.addEventListener('click', share)
 
 const addItem = async() => {
     if(itemName.value && itemUrl.value){
-        const items = await getItems()
+        const lists = await getLists()
         let exchangeDate
-        for (i in items) {
-            if (items[i].list_id == listId) {
-                exchangeDate = items[i].exchange_date
+        for (i in lists) {
+            if (lists[i].id == listId) {
+                exchangeDate = lists[i].exchange_date
             }
         }
         await postItem({
@@ -125,12 +125,12 @@ const addItem = async() => {
         div.style.display = 'flex'
         list.appendChild(div)
         let id = 0
+        const items = await getItems()
         for(i in items){
-            if(items[i].id > id){
+            if(items[i].list_id == listId){
                 id = items[i].id
             }
         }
-        id += 1
 
         const deleteItem = async() => {
             list.removeChild(div)
