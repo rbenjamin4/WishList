@@ -13,7 +13,7 @@ if (process.env.JAWSDB_URL) {
     {
       host: process.env.DB_HOST,
       dialect: 'postgres',
-      port: 5432
+      port: 5433
     }
   );
 }
