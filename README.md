@@ -43,10 +43,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 https://smart-wish-list.onrender.com/
 
 ## Screenshots
-![Alt text](<public/screenshots/Screenshot 2024-01-25 192414.png>)
-![Alt text](<public/screenshots/Screenshot 2024-01-25 192516.png>)
-![Alt text](<public/screenshots/Screenshot 2024-01-25 192628.png>)
-![Alt text](<public/screenshots/Screenshot 2024-01-25 192640.png>)
-![Alt text](<public/screenshots/Screenshot 2024-01-25 192651.png>)
-![Alt text](<public/screenshots/Screenshot 2024-01-25 192706.png>)
-![Alt text](<public/screenshots/Screenshot 2024-01-25 192721.png>)
+![Login page](./public/screenshots/screenshotlogin.jpg)
+![Create Account page](./public/screenshots/screenshotcreateaccount.jpg)
+![About page](./public/screenshots/screenshotabout.jpg)
+![Home page](./public/screenshots/screenshothomepage.jpg)
+![Create New List page](./public/screenshots/screenshotnewlist.jpg)
+![Edit List page](./public/screenshots/screenshoteditlist.jpg)
+![View Shared List page](./public/screenshots/screenshotsharedlist.jpg)
+![View Expired List page](./public/screenshots/screenshotexpiredlist.jpg)
