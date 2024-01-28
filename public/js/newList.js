@@ -49,7 +49,7 @@ const addItem = () => {
 add.addEventListener('click', addItem)
 
 const finishList = async() => {
-    finish.remove()
+    finish.disabled = true
     if(items && exchangeDate && listName){
         await postList({
             list_owner: currentUser,
