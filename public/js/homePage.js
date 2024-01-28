@@ -84,7 +84,7 @@ const deleteOwnedList = async(listId) => {
         } 
     }
     for(i in lists){
-        if(lists[i].id = listId){
+        if(lists[i].id == listId){
             await deleteLists(listId)
         }
     }
