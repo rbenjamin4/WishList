@@ -127,11 +127,10 @@ const addItem = async() => {
         let id = 0
         const items = await getItems()
         for(i in items){
-            if(items[i].id > id){
+            if(items[i].list_id == listId){
                 id = items[i].id
             }
         }
-        id += 1
 
         const deleteItem = async() => {
             list.removeChild(div)
