@@ -21,7 +21,7 @@ h3 {
 
 .list-of-lists {
     background-color: var(--pink);
-    height: 450px;
+    min-height: 450px;
     width: 600px;
     margin: 10px;
     border: solid black 5px;
@@ -35,7 +35,7 @@ h3 {
 
 #new-list-button {
     position: absolute;
-    bottom: 5px;
+    bottom: -50px;
     left: 5px;
     width: 98%;
     padding: 10px;
