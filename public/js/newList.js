@@ -7,14 +7,6 @@ const listName = document.querySelector('#listName')
 const finish = document.querySelector('#finish')
 const items = []
 
-
-
-
-
-
-
-
-
 const addItem = () => {
     if(itemName.value && itemUrl.value){
         const newItem = {name: itemName.value, url: itemUrl.value}
@@ -49,28 +41,29 @@ const addItem = () => {
 add.addEventListener('click', addItem)
 
 const finishList = async() => {
-    if(items && exchangeDate && listName){
+    if(items && exchangeDate.value && listName.value){
+        finish.disabled = true
         await postList({
             list_owner: currentUser,
             name : listName.value,
             exchange_date: exchangeDate.value
         })
         const users = await getUsers()
-        let thisUser
+        let thisUser = {}
         for(i in users){
-            if(users[i].id = currentUser){
+            if(users[i].id == currentUser){
                 thisUser = users[i]
             }
         }
-        let listId
+        let listId = ''
         const lists = await getLists()
         for(i in lists){
             if(lists[i].list_owner == currentUser && !thisUser.owned_lists){
                 listId = lists[i].id
-                await updateUser(currentUser, {owned_lists: listId})
-            }else if(lists[i].list_owner == thisUser.id && !thisUser.owned_lists.split(',').includes(lists[i].id)){
+                await updateUser(thisUser.id, {owned_lists: listId})
+            }else if(lists[i].list_owner == thisUser.id && !thisUser.owned_lists.split(',').includes(lists[i].id + '')){
                 listId = lists[i].id
-                await updateUser(currentUser, {owned_lists: thisUser.owned_lists + ',' + listId})
+                await updateUser(thisUser.id, {owned_lists: thisUser.owned_lists + ',' + listId})
             }
         }
         for(i in items){

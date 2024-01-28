@@ -133,7 +133,6 @@ const displayOwnedList = async(listId) => {
     const deleteButton = document.createElement("button");
     //if list is expired, make expired class, otherwise use list class
     if(expDateFormat.isBefore(dayjs().add(1, 'day').startOf('day'))){
-        console.log('expired');
         list.setAttribute("class", "expired-list");
     } else {
         list.setAttribute("class", "list"); 

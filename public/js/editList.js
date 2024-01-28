@@ -69,8 +69,7 @@ const share = async() => {
             if(users[i].id != currentUser){
                 if(users[i].shared_lists){
                     const sharedLists = users[i].shared_lists.split(',')
-                    console.log(sharedLists)
-                    if(!sharedLists.includes(listId)){
+                    if(!sharedLists.includes(listId + '')){
                         await updateUser(users[i].id, {shared_lists: users[i].shared_lists + ',' + listId})
                     }
                 }else{
