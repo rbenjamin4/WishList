@@ -222,14 +222,14 @@ const extractListsByUserId = async (userId) => {
         if(object[i].id == userId){
             if(object[i].owned_lists){
                 let ownedListsArray = object[i].owned_lists.split(',');
-                for(let i = 0; i < ownedListsArray.length; i++){
-                    displayOwnedList(ownedListsArray[i]);
+                for(let j = 0; j < ownedListsArray.length; j++){
+                    displayOwnedList(ownedListsArray[j]);
                 }
             }
             if(object[i].shared_lists){
                 let sharedListsArray = object[i].shared_lists.split(',');
-                for(let i = 0; i < sharedListsArray.length; i++){
-                    displaySharedList(sharedListsArray[i]);
+                for(let j = 0; j < sharedListsArray.length; j++){
+                    displaySharedList(sharedListsArray[j]);
                 }
             }
         }
